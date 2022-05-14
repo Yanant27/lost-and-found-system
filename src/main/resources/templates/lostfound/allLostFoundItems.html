@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>All Lost/Found Items</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-2">All Lost/Found Items</h3>
+            <div class="d-flex justify-content-center">
+                <table class="table table-hover table-responsive text-wrap w-75">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="w-10">Type</th>
+                        <th scope="col" class="w-15">Category</th>
+                        <th scope="col" class="w-30">Title</th>
+                        <th scope="col" class="w-15">Lost Date</th>
+                        <th scope="col" class="w-20">Lost Location</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Lost</td>
+                        <td>Electronics</td>
+                        <td>Missing Dell Laptop</td>
+                        <td>2022/01/02</td>
+                        <td>Library</td>
+                        <td><a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewItemModal">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Found</td>
+                        <td>Documents</td>
+                        <td>Passport Registration Documents</td>
+                        <td>2022/02/09</td>
+                        <td>Yim Cafe</td>
+                        <td><a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewItemModal">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Lost</td>
+                        <td>Accessories</td>
+                        <td>Hair clips</td>
+                        <td>2022/03/01</td>
+                        <td>Library</td>
+                        <td><a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewItemModal">View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Modal for Edit User Account Information -->
+                <div th:replace="~{fragments/modal :: viewItemModal}"></div>
+
+                <!-- Modal for Edit User Account Information -->
+                <div th:replace="~{fragments/modal :: newOrEditItemModal}"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-3 m-2">Profile Information</h3>
+            <div class="d-flex flex-column align-items-center justify-content-center grid gap-4">
+                <div class="card px-0 bg-light w-50">
+                    <div class="card-body">
+                        <form class="needs-validation p-3" action="" method="post">
+                            <div class="row mb-4">
+                                <div class="col input-group">
+                                    <input type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" required>
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col input-group">
+                                    <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
+                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col input-group">
+                                    <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" required>
+                                    <span class="input-group-text">@</span>
+                                </div>
+                            </div>
+
+                            <h6 class="py-2">Address</h6>
+                            <div class="row mb-4">
+                                <div class="col input-group">
+                                    <input type="text" class="form-control" placeholder="Street" aria-label="Street" required>
+                                    <input type="text" class="form-control" placeholder="City" aria-label="City" required>
+                                    <select class="form-select" aria-label="State">
+                                        <option value="1">Mon</option>
+                                        <option value="2">Kayin</option>
+                                        <option value="2">Tanintaryi</option>
+                                    </select>
+                                    <span class="input-group-text"><i class="bi bi-geo-alt" ></i></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#" class="btn btn-success w-100">Update Profile</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card px-0 bg-light w-50">
+                    <div class="card-body">
+                        <form class="needs-validation p-3" action="" method="post">
+                            <h6 class="py-2">Change Username</h6>
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="username" placeholder="Enter a new username" required>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success px-2">Change Username</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card px-0 bg-light w-50 mb-5">
+                    <div class="card-body">
+                        <form class="needs-validation p-3" action="" method="post">
+                            <h6 class="py-2">Change Password</h6>
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="currentPassword" required>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="newPassword" required>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-4">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="confirmPassword" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#" class="btn btn-success w-100">Change Password</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

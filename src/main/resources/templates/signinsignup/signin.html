@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/signinSignupLayout}">
+<head>
+    <title>Sign In</title>
+</head>
+<body>
+
+<div layout:fragment="content"  class="card px-0 bg-light">
+    <div class="card-body">
+        <h5 class="card-title fs-4 text-center mb-4">Sign In</h5>
+
+        <form class="needs-validation">
+            <div class="mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" required>
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                </div>
+
+                <div class="valid-feedback">
+                    Valid
+                </div>
+                <div class="invalid-feedback">
+                    Please enter a valid username.
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="input-group">
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" required>
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                </div>
+                <a href="#" class="fs-15px">Forgot Password?</a>
+
+                <div class="valid-feedback">
+                    Valid
+                </div>
+                <div class="invalid-feedback">
+                    Please enter a valid username.
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="rememberme">
+                    <label class="form-check-label" for="rememberme">
+                        Remember Me
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <button class="btn btn-primary w-100" type="submit">Sign In</button>
+            </div>
+
+            <div class="mb-2 fs-15px">
+                Don't have an account? <a href="#">Sign Up Here</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Approval</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-2">These posts haven't approved yet !</h3>
+            <div class="d-flex justify-content-center">
+                <table class="table table-hover table-responsive text-wrap w-75">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Lost</td>
+                        <td>Electronics</td>
+                        <td>Missing Dell Laptop</td>
+                        <td>Pending</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#detailInfoModal"><i class="bi bi-eye text-white pe-1"></i>Details</a>
+                            <a href="#" class="btn btn-sm btn-success me-2"><i class="bi bi-check text-white pe-1"></i>Approve</a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-x text-white pe-1"></i>Reject</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Found</td>
+                        <td>Documents</td>
+                        <td>Passport Registration Documents</td>
+                        <td>Approved</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#detailInfoModal"><i class="bi bi-eye text-white pe-1"></i>Details</a>
+                            <a href="#" class="btn btn-sm btn-success me-2"><i class="bi bi-check text-white pe-1"></i>Approve</a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-x text-white pe-1"></i>Reject</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Lost</td>
+                        <td>Accessories</td>
+                        <td>Hair clips</td>
+                        <td>Rejected</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#detailInfoModal"><i class="bi bi-eye text-white pe-1"></i>Details</a>
+                            <a href="#" class="btn btn-sm btn-success me-2"><i class="bi bi-check text-white pe-1"></i>Approve</a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-x text-white pe-1"></i>Reject</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Modal for Detail Informaton -->
+                <div class="modal fade" id="detailInfoModal" tabindex="-1" aria-labelledby="detailInfoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="detailInfoModalLabel">Found Item Detail Information</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="p-3">
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Title
+                                        </div>
+                                        <div class="col-auto">
+                                            Dell Laptop
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Category
+                                        </div>
+                                        <div class="col-auto">
+                                            Electronics
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Found Date
+                                        </div>
+                                        <div class="col-auto">
+                                            2022/01/21
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Found Location
+                                        </div>
+                                        <div class="col-auto">
+                                            Hlaing Township
+                                        </div>
+                                    </div>
+                                    <div class="row border-bottom border-3 py-2">
+                                        <div class="col-4">
+                                            Detail Description
+                                        </div>
+                                        <div class="col-8">
+                                            <p>Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                                dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                    <h6 class="mt-2">Contact Information</h6>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Name
+                                        </div>
+                                        <div class="col-8">
+                                            War War Aung
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            Phone Number
+                                        </div>
+                                        <div class="col-8">
+                                            09-123456789
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-4">
+                                            E-mail
+                                        </div>
+                                        <div class="col-8">
+                                            warwaraung@gmail.com
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <div class="modal-footer">-->
+<!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Reported Items</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-2">Reported Items</h3>
+            <div class="container w-75">
+                <div class="pb-3">
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrEditItemModal">
+                        <i class="bi-plus-circle text-white pe-2"></i>New Item</a>
+                </div>
+
+                <table class="table table-hover table-responsive text-wrap">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="w-15">Type</th>
+                        <th scope="col" class="w-25">Category</th>
+                        <th scope="col" class="w-45">Title</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Lost</td>
+                        <td>Electronics</td>
+                        <td>Missing Dell Laptop</td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewItemModal"><i class="bi bi-eye text-primary"></i></a>
+                            <a href="#" class="mx-3" data-bs-toggle="modal" data-bs-target="#newOrEditItemModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Found</td>
+                        <td>Documents</td>
+                        <td>Passport Registration Documents</td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewItemModal"><i class="bi bi-eye text-primary"></i></a>
+                            <a href="#" class="mx-3" data-bs-toggle="modal" data-bs-target="#newOrEditItemModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Lost</td>
+                        <td>Accessories</td>
+                        <td>Hair clips</td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewItemModal"><i class="bi bi-eye text-primary"></i></a>
+                            <a href="#" class="mx-3" data-bs-toggle="modal" data-bs-target="#newOrEditItemModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Modal for View Lost/Found Item Information -->
+                <div th:replace="~{fragments/modal :: viewItemModal}"></div>
+
+                <!-- Modal for New or Edit Lost/Found Item Information -->
+                <div th:replace="~{fragments/modal :: newOrEditItemModal}"></div>
+
+                <!-- Modal for Confirmation of Delete Operation -->
+                <div th:replace="~{fragments/modal :: deleteConfirmationModal}"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

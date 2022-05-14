@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Report Form</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-2">Report Form</h3>
+            <div class="d-flex justify-content-center">
+                <div class="card px-0 bg-light w-50">
+                    <div class="card-body">
+                        <form class="needs-validation p-2">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mb-3">
+                                        <h6>Item Information</h6>
+                                        <input type="hidden" /> <!-- for ID -->
+                                        <div class="col">
+                                            <label for="postType">Post Type</label>
+                                            <select class="form-select" id="postType">
+                                                <option value="1">Lost</option>
+                                                <option value="2">Found</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="category">Category</label>
+                                            <select class="form-select" id="category">
+                                                <option value="1">Electronics</option>
+                                                <option value="2">Documents</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="title" class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="title" placeholder="Eg. Missing Laptop" required>
+                                        </div>
+                                        <div class="col">
+<!--                                            <label for="status" class="form-label">Status</label>-->
+<!--                                            <select class="form-select" id="status">-->
+<!--                                                <option value="1">Pending</option>-->
+<!--                                                <option value="2">Active</option>-->
+<!--                                                <option value="3">Rejected</option>-->
+<!--                                                <option value="3">Completed</option>-->
+<!--                                            </select>-->
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="lostFoundDate" class="form-label">Lost/Found Date</label>
+                                            <input type="text" class="form-control" id="lostFoundDate" placeholder="YYYY-MM-DD"
+                                                   pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                                                   required>
+                                        </div>
+                                        <div class="col">
+                                            <label for="lostFoundLocation" class="form-label">Lost/Found Location</label>
+                                            <input type="text" class="form-control" id="lostFoundLocation" placeholder="Eg. 21st Bus stop" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="detailDescription" class="form-label">Detail Description</label>
+                                            <textarea class="form-control" id="detailDescription" placeholder="Write detail description about lost/found item ..." rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <h6>Contact Information</h6>
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="contactName" placeholder="Name" required />
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="contactPhoneNo" placeholder="Phone Number" required />
+                                        </div>
+                                        <div class="col">
+                                            <input type="email" class="form-control" id="email" placeholder="E-mail" required />
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <button class="btn btn-success w-100" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

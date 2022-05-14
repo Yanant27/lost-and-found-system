@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/signinSignupLayout}">
+<head>
+    <title>Sign In</title>
+</head>
+<body>
+
+<div layout:fragment="content"  class="card bg-light">
+    <div class="card-body">
+        <h5 class="card-title fs-4 text-center mb-4">Sign Up</h5>
+
+        <form class="needs-validation p-3" action="" method="post">
+            <input type="hidden"><!-- ID -->
+            <div class="row mb-4">
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" required>
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
+                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" required>
+                    <span class="input-group-text">@</span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="Street" aria-label="Street" required>
+                    <input type="text" class="form-control" placeholder="City" aria-label="City" required>
+                    <select class="form-select" aria-label="State">
+                        <option value="1">Mon</option>
+                        <option value="2">Kayin</option>
+                        <option value="2">Tanintaryi</option>
+                    </select>
+                    <span class="input-group-text"><i class="bi bi-geo-alt" ></i></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" required>
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                </div>
+                <div class="col input-group">
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" required>
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <a href="#" class="btn btn-success w-100">Sign UP</a>
+                </div>
+            </div>
+
+            <div class="mb-2 fs-15px">
+                Already have an account? <a href="#">Sign In Here</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

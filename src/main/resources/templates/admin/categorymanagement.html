@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Management</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+            <h3 class="text-center p-3 m-2">Category Management</h3>
+            <div class="container align-items-center w-75">
+                <div class="pb-3">
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal">
+                        <i class="bi-plus-circle text-white pe-2"></i>Add Category</a>
+                </div>
+                <table class="table table-hover table-responsive text-wrap">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="w-20">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="w-10">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Electronics</td>
+                        <td>It includes phones, laptops, powerbank, etc.</td>
+                        <td>
+                            <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#editCategoryModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Documents</td>
+                        <td>It includes contracts, bank transaction statements, and all printed documents.</td>
+                        <td>
+                            <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#editCategoryModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden>ID</td>
+                        <td>Jewelleries</td>
+                        <td>It includes earings, rings, necklaces and all other gems.</td>
+                        <td>
+                            <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#editCategoryModal"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Modal for Edit Category -->
+                <div th:replace="~{fragments/modal :: editCategoryModal}"></div>
+
+                <!-- Modal for Confirmation of Delete Operation -->
+                <div th:replace="~{fragments/modal :: deleteConfirmationModal}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
