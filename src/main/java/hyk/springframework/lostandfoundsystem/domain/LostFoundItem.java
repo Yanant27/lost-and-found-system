@@ -1,13 +1,14 @@
 package hyk.springframework.lostandfoundsystem.domain;
 
 import hyk.springframework.lostandfoundsystem.enums.Type;
+import hyk.springframework.lostandfoundsystem.enums.backup.Category;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 /**
@@ -43,6 +44,6 @@ public class LostFoundItem extends BaseEntity {
 //    @Pattern(regexp = "^[09-]\\d{9}$")
     private String reporterPhoneNo;
 
-    @ManyToOne// owning side
+    @Embedded
     private Category category;
 }

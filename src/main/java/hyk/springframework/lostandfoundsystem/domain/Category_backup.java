@@ -3,9 +3,6 @@ package hyk.springframework.lostandfoundsystem.domain;
 import lombok.*;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.Set;
 
 /**
  * @author Htoo Yanant Khin
@@ -15,9 +12,9 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+//@Entity
 //@AttributeOverride(name = "id", column = @Column(name = "category_id"))
-public class Category extends BaseEntity {
+public class Category_backup extends BaseEntity {
 
     @Column(name = "category_name")
     private String categoryName;
@@ -25,6 +22,6 @@ public class Category extends BaseEntity {
     @Column(name = "category_description")
     private String categoryDescription;
 
-    @OneToMany(mappedBy = "category") // non-owning side
-    private Set<LostFoundItem> lostFoundItems;
+//    @OneToMany(mappedBy = "category") // non-owning side
+//    private Set<LostFoundItem> lostFoundItems;
 }
