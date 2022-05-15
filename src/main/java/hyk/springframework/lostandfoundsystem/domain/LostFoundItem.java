@@ -5,10 +5,7 @@ import hyk.springframework.lostandfoundsystem.enums.backup.Category;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -46,4 +43,9 @@ public class LostFoundItem extends BaseEntity {
 
     @Embedded
     private Category category;
+
+    @Column(updatable = false)
+    private String createdBy;
+
+    private String modifiedBy;
 }
