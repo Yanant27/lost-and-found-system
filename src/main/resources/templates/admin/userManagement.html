@@ -7,55 +7,45 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
-        <div layout:fragment="content" class="col">
-            <h3 class="text-center p-2">User Management</h3>
-            <div class="container">
-                <div class="pb-3">
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newUserAccountModal">
-                        <i class="bi-plus-circle text-white pe-2"></i>New User Account</a>
-                </div>
-                <table class="table table-hover table-responsive text-wrap">
-                    <thead class="table-light">
-                    <tr>
-                        <th scope="col" class="w-10">Username</th>
-                        <th scope="col" class="w-15">Full Name</th>
-                        <th scope="col" class="w-15">Phone Number</th>
-                        <th scope="col" class="w-20">E-mail</th>
-                        <th scope="col" class="w-30">Address</th>
-                        <th scope="col">Enable/Disable</th>
-                        <th scope="col">Lock/Unlock</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td hidden>ID</td>
-                        <td>warwar</td>
-                        <td>War War Aung</td>
-                        <td>09-123456789</td>
-                        <td>warwaraung@gmail.com</td>
-                        <td>Aung Thiri Street, Mudon, Mon</td>
-                        <td>Enable</td>
-                        <td>Unlock</td>
-                        <td>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#editUserAccountModal"><i class="bi bi-pencil-square text-success"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- Modal for Edit User Account Information -->
-                <div th:replace="~{fragments/modal :: editUserAccountModal}"></div>
-
-                <!-- Modal for New User Account Information -->
-                <div th:replace="~{fragments/modal :: newUserAccountModal}"></div>
-
-            </div>
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h3 class="text-center p-2">User Management</h3>
+    <div class="container">
+        <div class="pb-3">
+            <a href="#" class="btn btn-primary">
+                <i class="bi-plus-circle text-white pe-2"></i>New User Account</a>
         </div>
+        <table class="table table-hover table-responsive text-wrap">
+            <thead class="table-light">
+            <tr>
+                <th scope="col" class="w-10">Username</th>
+                <th scope="col" class="w-15">Full Name</th>
+                <th scope="col" class="w-15">Phone Number</th>
+                <th scope="col" class="w-20">E-mail</th>
+                <th scope="col" class="w-30">Address</th>
+                <th scope="col">Enable/Disable</th>
+                <th scope="col">Lock/Unlock</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td hidden>ID</td>
+                <td>warwar</td>
+                <td>War War Aung</td>
+                <td>09-123456789</td>
+                <td>warwaraung@gmail.com</td>
+                <td>Aung Thiri Street, Mudon, Mon</td>
+                <td>Enable</td>
+                <td>Unlock</td>
+                <td>
+                    <a href="#"><i class="bi bi-pencil-square text-success"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
 </body>
 </html>

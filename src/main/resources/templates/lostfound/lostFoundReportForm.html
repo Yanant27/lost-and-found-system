@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Lost/Found Item Report Form</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h3 class="text-center p-3 m-3">Lost/Found Item Report Form</h3>
+    <div class="d-flex flex-column align-items-center justify-content-center mb-5">
+        <div class="card p-4 bg-light w-50">
+            <div class="card-body">
+                <form class="needs-validation" action="" method="post">
+                    <input type="hidden"><!-- ID -->
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" required>
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <select class="form-select" aria-label="Type">
+                                <option value="1">Lost</option>
+                                <option value="2">Found</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select" aria-label="Category">
+                                <option value="1">Electronics</option>
+                                <option value="2">Documents</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Title" aria-label="Title" required>
+                            <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Lost/Found Date (YYYY-MM-DD)" aria-label="Lost/Found Date" required
+                                   pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+                            <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Lost/Found Location" aria-label="Lost/Found Location" required>
+                            <span class="input-group-text"><i class="bi bi-pin-map"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <textarea class="form-control" placeholder="Detail Description (Write other necessary information for lost/found item)" aria-label="Lost/Found Location" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <h6>Contact Information</h6>
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" required>
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col input-group">
+                            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" required>
+                            <span class="input-group-text">@</span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <button class="btn btn-success w-100" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Lost/Found Item Detail</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h3 class="text-center p-3 m-3">Found Item Detail</h3>
+    <h3 class="text-center p-3 m-3" hidden>Lost Item Detail</h3>
+    <div class="d-flex flex-column align-items-center justify-content-center mb-5">
+        <div class="card px-4 bg-light w-50">
+            <div class="card-body">
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Title
+                    </div>
+                    <div class="col-auto">
+                        <span>Dell Laptop</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Category
+                    </div>
+                    <div class="col-auto">
+                        <span>Electronics</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Found Date
+                    </div>
+                    <div class="col-4" hidden>
+                        Lost Date
+                    </div>
+                    <div class="col-auto">
+                        <span>2022/01/21</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Found Location
+                    </div>
+                    <div class="col-4" hidden>
+                        Lost Location
+                    </div>
+                    <div class="col-auto">
+                        <span>Hlaing Township</span>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-4">
+                        Created By
+                    </div>
+                    <div class="col-8">
+                        <span>War War Aung</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Modified By
+                    </div>
+                    <div class="col-8">
+                        <span>War War Aung</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Detail Description
+                    </div>
+                    <div class="col-8">
+                        <p>Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <h6 class="mt-3">Contact Information</h6>
+                <div class="row py-2">
+                    <div class="col-4">
+                        Name
+                    </div>
+                    <div class="col-8">
+                        <span>War War Aung</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        Phone Number
+                    </div>
+                    <div class="col-8">
+                        <span>09-123456789</span>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-4">
+                        E-mail
+                    </div>
+                    <div class="col-8">
+                        <span>warwaraung@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="row py-3 text-center">
+                    <a href="#">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
