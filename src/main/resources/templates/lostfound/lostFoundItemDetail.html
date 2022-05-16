@@ -9,8 +9,8 @@
 
 <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
 <div layout:fragment="content" class="col">
-    <h3 class="text-center p-3 m-3">Found Item Detail</h3>
-    <h3 class="text-center p-3 m-3" hidden>Lost Item Detail</h3>
+    <h3 class="text-center p-3 m-3" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Item Detail' : 'Lost Item Detail'">Item Detail</h3>
+<!--    <h3 class="text-center p-3 m-3" th:if="${lostFoundItem.type.name()} == 'LOST'">LOST Item Detail</h3>-->
     <div class="d-flex flex-column align-items-center justify-content-center mb-5">
         <div class="card px-4 bg-light w-50">
             <div class="card-body">
@@ -19,8 +19,8 @@
                     <div class="col-4">
                         Title
                     </div>
-                    <div class="col-auto">
-                        <span>Dell Laptop</span>
+                    <div class="col-auto" >
+                        <span th:text="${lostFoundItem.title}">Dell Laptop</span>
                     </div>
                 </div>
 
@@ -29,31 +29,25 @@
                         Category
                     </div>
                     <div class="col-auto">
-                        <span>Electronics</span>
+                        <span th:text="${lostFoundItem.category}">Electronics</span>
                     </div>
                 </div>
 
                 <div class="row py-2">
-                    <div class="col-4">
-                        Found Date
-                    </div>
-                    <div class="col-4" hidden>
-                        Lost Date
+                    <div class="col-4" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Date' : 'Lost Date'">
+                        Date
                     </div>
                     <div class="col-auto">
-                        <span>2022/01/21</span>
+                        <span th:text="${lostFoundItem.lostFoundDate}">2022/01/21</span>
                     </div>
                 </div>
 
                 <div class="row py-2">
-                    <div class="col-4">
-                        Found Location
-                    </div>
-                    <div class="col-4" hidden>
-                        Lost Location
+                    <div class="col-4" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Location' : 'Lost Location'">
+                        Location
                     </div>
                     <div class="col-auto">
-                        <span>Hlaing Township</span>
+                        <span th:text="${lostFoundItem.lostFoundLocation}">Hlaing Township</span>
                     </div>
                 </div>
                 <div class="row py-2">
@@ -61,7 +55,7 @@
                         Created By
                     </div>
                     <div class="col-8">
-                        <span>War War Aung</span>
+                        <span th:text="${lostFoundItem.createdBy}">War War Aung</span>
                     </div>
                 </div>
 
@@ -70,7 +64,7 @@
                         Modified By
                     </div>
                     <div class="col-8">
-                        <span>War War Aung</span>
+                        <span th:text="${lostFoundItem.modifiedBy}">War War Aung</span>
                     </div>
                 </div>
 
@@ -79,7 +73,7 @@
                         Detail Description
                     </div>
                     <div class="col-8">
-                        <p>Lorem ipsum dolor sit amet, consectetur
+                        <p th:text="${lostFoundItem.description}">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                             dolore magna aliqua.</p>
                     </div>
@@ -91,7 +85,7 @@
                         Name
                     </div>
                     <div class="col-8">
-                        <span>War War Aung</span>
+                        <span th:text="${lostFoundItem.reporterName}">War War Aung</span>
                     </div>
                 </div>
 
@@ -100,7 +94,7 @@
                         Phone Number
                     </div>
                     <div class="col-8">
-                        <span>09-123456789</span>
+                        <span th:text="${lostFoundItem.reporterPhoneNo}">09-123456789</span>
                     </div>
                 </div>
 
@@ -109,13 +103,13 @@
                         E-mail
                     </div>
                     <div class="col-8">
-                        <span>warwaraung@gmail.com</span>
+                        <span th:text="${lostFoundItem.reporterEmail}">warwaraung@gmail.com</span>
                     </div>
                 </div>
 
-                <div class="row py-3 text-center">
-                    <a href="#">Back</a>
-                </div>
+<!--                <div class="row py-3 text-center">-->
+<!--                    <a th:href="@{/lostFound/show}">Back</a>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

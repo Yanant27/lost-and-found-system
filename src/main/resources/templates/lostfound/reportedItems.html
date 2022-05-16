@@ -14,10 +14,11 @@
             <h3 class="text-center p-2">Reported Items</h3>
             <div class="container w-75">
                 <div class="pb-3">
-                    <a href="#" class="btn btn-primary"><i class="bi-plus-circle text-white pe-2"></i>New Item</a>
+                    <a th:href="@{/lostFound/new}" class="btn btn-primary"><i class="bi-plus-circle text-white pe-2"></i>New Item</a>
                 </div>
 
-                <table class="table table-hover table-responsive text-wrap">
+                <table class="table table-hover table-responsive text-wrap"
+                       th:if="${not #lists.isEmpty(lostFoundItemByAccountId)}">
                     <thead class="table-light">
                     <tr>
                         <th scope="col" class="w-15">Type</th>
@@ -27,7 +28,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr th:each="lostFoundItem : ${lostFoundItemByAccountId}">
+                        <td th:text="${lostFoundItem.id}" hidden>ID</td>
+                        <td th:text="${lostFoundItem.type}">Lost</td>
+                        <td th:text="${lostFoundItem.category}">Electronics</td>
+                        <td th:text="${lostFoundItem.title}">Missing Dell Laptop</td>
+                        <td>
+                            <a th:href="@{'/lostFound/show/' + ${lostFoundItem.id}}"><i class="bi bi-eye text-primary"></i></a>
+                            <a th:href="@{'/lostFound/edit/' + ${lostFoundItem.id}}" class="mx-3"><i class="bi bi-pencil-square text-success"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                        </td>
+                    </tr>
+
+                    <tr th:remove="all">
                         <td hidden>ID</td>
                         <td>Lost</td>
                         <td>Electronics</td>
@@ -38,7 +51,7 @@
                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr th:remove="all">
                         <td hidden>ID</td>
                         <td>Found</td>
                         <td>Documents</td>
@@ -49,7 +62,7 @@
                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr th:remove="all">
                         <td hidden>ID</td>
                         <td>Lost</td>
                         <td>Accessories</td>
