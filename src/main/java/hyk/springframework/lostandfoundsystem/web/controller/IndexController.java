@@ -18,9 +18,9 @@ public class IndexController {
     @GetMapping({"", "/", "/index"})
     public String countLostItem(Model model) {
         model.addAttribute("lostItemsCount",
-                lostFoundItemService.countItemByType(Type.LOST));
+                lostFoundItemService.countLostFoundItemByType(Type.LOST));
         model.addAttribute("foundItemsCount",
-                lostFoundItemService.countItemByType(Type.FOUND));
+                lostFoundItemService.countLostFoundItemByType(Type.FOUND));
         return "index";
     }
 }

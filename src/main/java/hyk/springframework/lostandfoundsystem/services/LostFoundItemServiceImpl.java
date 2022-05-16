@@ -1,6 +1,7 @@
 package hyk.springframework.lostandfoundsystem.services;
 
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
+import hyk.springframework.lostandfoundsystem.enums.Type;
 import hyk.springframework.lostandfoundsystem.exceptions.ItemNotFoundException;
 import hyk.springframework.lostandfoundsystem.repositories.LostFoundItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,23 +20,33 @@ public class LostFoundItemServiceImpl implements LostFoundItemService {
     private final LostFoundItemRepository lostFoundItemRepository;
 
     @Override
-    public List<LostFoundItem> getLostFoundItems() {
+    public List<LostFoundItem> findAllLostFoundItems() {
         return lostFoundItemRepository.findAll();
     }
 
     @Override
-    public LostFoundItem findItemById(UUID id) {
-        return lostFoundItemRepository.findById(id).orElseThrow(
-                () -> new ItemNotFoundException("Item not found, ID: " + id));
+    public LostFoundItem findLostFoundItemById(UUID itemId) {
+        return lostFoundItemRepository.findById(itemId).orElseThrow(
+                () -> new ItemNotFoundException("Item not found, ID: " + itemId));
     }
 
     @Override
-    public LostFoundItem saveItem(LostFoundItem lostFoundItem) {
+    public List<LostFoundItem> findLostFoundItemByAccountId(UUID accountId) {
+        return lostFoundItemRepository.findAllByCurrentAccount(accountId);
+    }
+
+    @Override
+    public LostFoundItem saveLostFoundItem(LostFoundItem lostFoundItem) {
         return lostFoundItemRepository.save(lostFoundItem);
     }
 
     @Override
-    public void deleteByItemId(UUID id) {
-        lostFoundItemRepository.deleteById(id);
+    public void deleteLostFoundItemById(UUID itemId) {
+        lostFoundItemRepository.deleteById(itemId);
+    }
+
+    @Override
+    public Long countLostFoundItemByType(Type type) {
+        return lostFoundItemRepository.countLostFoundItemByType(type);
     }
 }

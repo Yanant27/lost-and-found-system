@@ -1,17 +1,22 @@
 package hyk.springframework.lostandfoundsystem.services;
 
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
+import hyk.springframework.lostandfoundsystem.enums.Type;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface LostFoundItemService {
 
-    List<LostFoundItem> getLostFoundItems();
+    List<LostFoundItem> findAllLostFoundItems();
 
-    LostFoundItem findItemById(UUID id);
+    LostFoundItem findLostFoundItemById(UUID itemId);
 
-    LostFoundItem saveItem(LostFoundItem lostFoundItem);
+    List<LostFoundItem> findLostFoundItemByAccountId(UUID accountId);
 
-    void deleteByItemId(UUID id);
+    LostFoundItem saveLostFoundItem(LostFoundItem lostFoundItem);
+
+    void deleteLostFoundItemById(UUID itemId);
+
+    Long countLostFoundItemByType(Type type);
 }
