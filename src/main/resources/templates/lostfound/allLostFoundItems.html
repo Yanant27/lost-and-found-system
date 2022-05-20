@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>All Lost/Found Items</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+        <div layout:fragment="content" class="col">
+                <!-- Test for authority of logged in user -->
+<!--            <div th:each="lostFoundItem : ${lostFoundItems}">-->
+<!--                <div th:text="${#authorization.expression('hasAuthority(''lostFoundItem.update'')')} or-->
+<!--                              (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.update'')')} and-->
+<!--                               ${#authentication?.principal?.userInfo.id} == ${lostFoundItem.userInfo.id})"></div>-->
+<!--            </div>-->
+            <h3 class="text-center p-3 m-3">All Lost/Found Reported Items</h3>
+            <div class="container">
+                <div class="row pb-3">
+<!--                    <div class="col">-->
+<!--                        <a th:href="@{/lostFound/new}" class="btn btn-primary"><i class="bi-plus-circle text-white pe-2"></i>New Item</a>-->
+<!--                    </div>-->
+                    <div class="col text-end">
+                        <a th:href="@{'/lostFound/show/current/' + ${#authentication?.principal?.id}}"
+                           class="btn btn-primary fw-semibold me-3"><i class="bi-check2 text-white pe-2"></i>Show My Items Only</a>
+                        <a th:href="@{/lostFound/show}" class="btn btn-primary fw-semibold"><i class="bi-check2-all text-white pe-2"></i>Show All Items</a>
+                    </div>
+                </div>
+
+                <table class="table table-hover table-responsive text-wrap">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="w-10">Type</th>
+                        <th scope="col" class="w-15">Category</th>
+                        <th scope="col" class="w-35">Title</th>
+                        <th scope="col" class="w-15">Lost Date</th>
+                        <th scope="col" class="w-20">Lost Location</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                    </thead> <!-- lostFoundItemsByReporterId -->
+                    <tbody th:if="${not #lists.isEmpty(lostFoundItems)}">
+                    <tr th:each="lostFoundItem : ${lostFoundItems}">
+                        <td th:text="${lostFoundItem.id}" hidden></td>
+                        <td th:text="${lostFoundItem.type}">Lost</td>
+                        <td th:text="${lostFoundItem.category}">Electronics</td>
+                        <td th:text="${lostFoundItem.title}">Missing Dell Laptop</td>
+                        <td th:text="${lostFoundItem.lostFoundDate}">2022-01-02</td>
+                        <td th:text="${lostFoundItem.lostFoundLocation}">Library</td>
+<!--                        <td><a class="btn btn-sm btn-primary" th:href="@{'/lostFound/show/' + ${lostFoundItem.id}}">View</a></td>-->
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a th:href="@{'/lostFound/show/' + ${lostFoundItem.id}}"><i class="bi bi-eye text-primary"></i></a>
+                                <a th:href="@{'/lostFound/edit/' + ${lostFoundItem.id}}"
+                                   th:if="${#authorization.expression('hasAuthority(''lostFoundItem.update'')')} or
+                                            (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.update'')')} and
+                                             ${#authentication?.principal?.id} == ${lostFoundItem.user.id})"
+                                   class="mx-3"><i class="bi bi-pencil-square text-success"></i></a>
+                                <a href="" th:if="${#authorization.expression('hasAuthority(''lostFoundItem.delete'')')} or
+                                            (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.delete'')')} and
+                                             ${#authentication?.principal?.id} == ${lostFoundItem.user.id})"
+                                   data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
+                            </div>
+                            <div th:fragment="deleteConfirmationModal"  class="modal fade" id="deleteConfirmationModal"
+                                 tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
+
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteConfirmationModalLabel">
+                                                <i class="bi bi-exclamation-triangle text-danger fs-4 me-3"></i>Are you sure ?
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            Do you really want to delete this record? This operation cannot be undone.
+                                            <div class="d-flex justify-content-center gap-3 mt-4">
+                                                <input type="hidden" /> <!-- for ID -->
+                                                <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                                                <a th:href="@{'/lostFound/delete/' + ${lostFoundItem.id}}" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div><!-- End of modal body> -->
+                                    </div>
+                                </div>
+                            </div> <!-- End of modal -->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
