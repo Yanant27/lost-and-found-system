@@ -10,9 +10,9 @@ public interface LostFoundItemService {
 
     List<LostFoundItem> findAllLostFoundItems();
 
-    LostFoundItem findLostFoundItemById(UUID itemId);
+    List<LostFoundItem> findAllLostFoundItemByUserId(Integer userId);
 
-    List<LostFoundItem> findLostFoundItemByAccountId(UUID accountId);
+    LostFoundItem findLostFoundItemById(UUID itemId);
 
     LostFoundItem saveLostFoundItem(LostFoundItem lostFoundItem);
 

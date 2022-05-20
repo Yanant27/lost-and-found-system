@@ -16,16 +16,16 @@
         <div class="card p-4 bg-light w-50">
             <div class="card-body">
                 <form th:object="${lostFoundItem}" class="needs-validation"
-                      th:with="createOrUpdate=${lostFoundItem['new']} ? 'new' : 'edit'"
-                      th:action="@{'/lostFound/' + ${createOrUpdate} + '/' + ${lostFoundItem.id}}"
+                      th:with="createOrUpdate=${lostFoundItem['new']} ? 'new' : 'edit/' + ${lostFoundItem.id}"
+                      th:action="@{'/lostFound/' + ${createOrUpdate}}"
                       method="post">
-                    <input type="hidden"><!-- ID -->
-<!--                    <div class="row mb-4">-->
-<!--                        <div class="col input-group">-->
-<!--                            <input type="text" class="form-control" placeholder="Title" aria-label="Title" required>-->
-<!--                            <span class="input-group-text"><i class="bi bi-person"></i></span>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <input type="hidden" th:field="*{id}" />
+                    <input type="hidden" th:field="*{createdBy}" />
+                    <input type="hidden" th:field="*{modifiedBy}" />
+                    <input type="hidden" th:field="*{createdTimestamp}" />
+                    <input type="hidden" th:field="*{lastModifiedTimestamp}" />
+                    <input type="hidden" th:field="*{version}" />
+                    <input type="hidden" th:field="*{user.id}" />
 
                     <div class="row mb-4">
                         <div class="col">
@@ -35,21 +35,14 @@
                                         th:text="${typeValue.name()}">Type
                                 </option>
                             </select>
-                            <select class="form-select" aria-label="Type" th:remove="all">
-                                <option value="1">Lost</option>
-                                <option value="2">Found</option>
-                            </select>
                         </div>
+
                         <div class="col">
                             <select class="form-select" aria-label="Category" th:field="*{category}">
                                 <option th:each="categoryValue : ${T(hyk.springframework.lostandfoundsystem.enums.Category).values()}"
                                         th:value="${categoryValue.name()}"
                                         th:text="${categoryValue.name()}">Category
                                 </option>
-                            </select>
-                            <select class="form-select" aria-label="Category" th:remove="all">
-                                <option value="1">Electronics</option>
-                                <option value="2">Documents</option>
                             </select>
                         </div>
                     </div>

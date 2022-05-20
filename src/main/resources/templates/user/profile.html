@@ -40,10 +40,11 @@
                         <div class="col input-group">
                             <input type="text" class="form-control" placeholder="Street" aria-label="Street" required>
                             <input type="text" class="form-control" placeholder="City" aria-label="City" required>
-                            <select class="form-select" aria-label="State">
-                                <option value="1">Mon</option>
-                                <option value="2">Kayin</option>
-                                <option value="2">Tanintaryi</option>
+                            <select class="form-select" aria-label="State" >
+                                <option th:each="stateValue : ${T(hyk.springframework.lostandfoundsystem.enums.State).values()}"
+                                        th:value="${stateValue.name()}"
+                                        th:text="${stateValue.name()}">State
+                                </option>
                             </select>
                             <span class="input-group-text"><i class="bi bi-geo-alt" ></i></span>
                         </div>

@@ -1,5 +1,6 @@
 package hyk.springframework.lostandfoundsystem.domain;
 
+import hyk.springframework.lostandfoundsystem.domain.security.User;
 import hyk.springframework.lostandfoundsystem.enums.Category;
 import hyk.springframework.lostandfoundsystem.enums.Type;
 import lombok.*;
@@ -52,7 +53,7 @@ public class LostFoundItem extends BaseEntity {
     private String createdBy;
 
     private String modifiedBy;
-    
+
     @ManyToOne
-    private Account account;
+    private User user;
 }

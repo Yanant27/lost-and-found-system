@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
 <!-- Start of Side Bar Navigation -->
-<div th:fragment="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 bg-light">
+<div th:fragment="sidebar" sec:authorize="isAuthenticated()"  class="col-auto col-md-3 col-xl-2 px-sm-2 bg-light">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-3 min-vh-100 sticky-top">
         <div class="d-flex align-items-center pb-3 me-md-auto">
-            <img class="ms-2" src="../static/images/logo.png" th:src="@{/images/logo.png}" alt="Logo" width="40"
-                 height="40">
+            <img class="ms-2" th:src="@{/images/logo.png}" alt="Logo" width="40" height="40">
             <span class="fs-5 d-none d-sm-inline ms-3">Lost & Found</span>
         </div>
-        <a href="#" class="nav-link px-0 align-middle w-100 border-top border-bottom py-2">
-            <i class="fs-4 bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Yanant</span>
+        <a th:href="@{/user/profile}" class="nav-link px-0 align-middle w-100 border-top border-bottom py-2">
+            <i class="fs-4 bi bi-person-circle"></i> <span th:text="${#authentication?.principal?.username}" class="ms-1 d-none d-sm-inline">Yanant</span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                <a th:href="@{/index}" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi bi-house-door"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
+                <a th:href="@{/lostFound/show}" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-list-ol"></i> <span class="ms-1 d-none d-sm-inline">All Items</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Reported Items</span></a>
+                <a th:href="@{/lostFound/new}" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Report New Item</span></a>
             </li>
 <!--            <li>-->
 <!--                <a href="#" class="nav-link px-0 align-middle">-->
 <!--                    <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Report</span></a>-->
 <!--            </li>-->
-            <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-grid-3x3-gap"></i> <span class="ms-1 d-none d-sm-inline">Category</span> </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="#" class="nav-link px-0 align-middle">-->
+<!--                    <i class="fs-4 bi-grid-3x3-gap"></i> <span class="ms-1 d-none d-sm-inline">Category</span> </a>-->
+<!--            </li>-->
 <!--            <li>-->
 <!--                <a href="#" class="nav-link px-0 align-middle">-->
 <!--                    <i class="fs-4 bi-check2-circle"></i> <span class="ms-1 d-none d-sm-inline">Approval</span> </a>-->
@@ -44,8 +44,8 @@
                     <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">User Management</span> </a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Sign Out</span> </a>
+                <a th:href="@{/logout}" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Log Out</span> </a>
             </li>
         </ul>
     </div>

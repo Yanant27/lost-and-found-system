@@ -4,7 +4,8 @@ import hyk.springframework.lostandfoundsystem.enums.State;
 import lombok.*;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * @author Htoo Yanant Khin
@@ -16,7 +17,7 @@ import javax.persistence.Embedded;
 @AllArgsConstructor
 @Embeddable
 public class Address {
-    @Embedded
+    @Enumerated(EnumType.STRING)
     private State state;
 
     private String city;

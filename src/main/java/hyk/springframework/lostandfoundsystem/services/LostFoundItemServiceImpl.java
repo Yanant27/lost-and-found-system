@@ -2,7 +2,6 @@ package hyk.springframework.lostandfoundsystem.services;
 
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
 import hyk.springframework.lostandfoundsystem.enums.Type;
-import hyk.springframework.lostandfoundsystem.exceptions.ItemNotFoundException;
 import hyk.springframework.lostandfoundsystem.repositories.LostFoundItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,24 +24,44 @@ public class LostFoundItemServiceImpl implements LostFoundItemService {
     }
 
     @Override
-    public LostFoundItem findLostFoundItemById(UUID itemId) {
-        return lostFoundItemRepository.findById(itemId).orElseThrow(
-                () -> new ItemNotFoundException("Item not found, ID: " + itemId));
+    public List<LostFoundItem> findAllLostFoundItemByUserId(Integer userId) {
+        return lostFoundItemRepository.findAllByUserId(userId);
     }
 
     @Override
-    public List<LostFoundItem> findLostFoundItemByAccountId(UUID accountId) {
-        return lostFoundItemRepository.findAllByCurrentAccount(accountId);
+    public LostFoundItem findLostFoundItemById(UUID itemId) {
+        return lostFoundItemRepository.findByIdSecure(itemId);
+//        return lostFoundItemRepository.findById(itemId).orElseThrow(
+//                () -> new ResourceNotFoundException("Item not found, ID: " + itemId));
     }
 
     @Override
     public LostFoundItem saveLostFoundItem(LostFoundItem lostFoundItem) {
+//        User user = LoginUserUtil.getLoginUser();
+//
+//        if (lostFoundItem.getUserInfo().getId() == null) {
+//            lostFoundItem.setUserInfo(
+//                    userInfoRepository.findById(user.getUserInfo().getId())
+//                            .orElseThrow(ResourceNotFoundException::new));
+//        }
+
+//        lostFoundItem.setCreatedBy(user.getUsername());
+//        lostFoundItem.setModifiedBy(user.getUsername());
+
+//        if (! StringUtils.hasLength(lostFoundItem.getCreatedBy())) {
+//            lostFoundItem.setCreatedBy(user.getUsername());
+//        }
+//
+//        if (! StringUtils.hasLength(lostFoundItem.getModifiedBy())) {
+//            lostFoundItem.setModifiedBy(user.getUsername());
+//        }
+
         return lostFoundItemRepository.save(lostFoundItem);
     }
 
     @Override
     public void deleteLostFoundItemById(UUID itemId) {
-        lostFoundItemRepository.deleteById(itemId);
+        lostFoundItemRepository.deleteByIdSecure(itemId);
     }
 
     @Override

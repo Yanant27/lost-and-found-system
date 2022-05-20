@@ -1,10 +1,19 @@
 package hyk.springframework.lostandfoundsystem.domain.security;
 
-import hyk.springframework.lostandfoundsystem.domain.UserAccountInfo;
+import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
+import hyk.springframework.lostandfoundsystem.domain.UserInfo;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Htoo Yanant Khin
@@ -15,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -23,13 +32,16 @@ public class User {
     private String username;
     private String password;
 
+    @Transient
+    private String passwordConfirm;
+
     @Singular // use with singular form "authority"
     /*
      * fetch = FetchType.EAGER -> can degrade performance
      * Collections are lazy-loaded by default
      * Or use @Transactional of spring framework
      */
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     // owning side
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
@@ -48,7 +60,47 @@ public class User {
     @Builder.Default
     private Boolean enabled = true;
 
-//    @OneToOne(fetch = FetchType.EAGER)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserAccountInfo userAccountInfo;
+    private UserInfo userInfo;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<LostFoundItem> lostFoundItems;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Timestamp createdDate;
+
+    @UpdateTimestamp
+    private Timestamp lastModifiedDate;
+
+    @Transient
+    public Set<GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(Role::getAuthorities)
+                .flatMap(Set::stream)
+                .map(authority -> {
+                    return new SimpleGrantedAuthority(authority.getPermission());
+                })
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 }

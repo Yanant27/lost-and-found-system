@@ -21,7 +21,6 @@ public class Role {
 
     private String name;
 
-    // bidirectional, non-owning side
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 

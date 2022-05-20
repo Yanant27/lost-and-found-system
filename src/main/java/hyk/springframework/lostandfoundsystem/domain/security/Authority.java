@@ -21,7 +21,6 @@ public class Authority {
 
     private String permission;
 
-    // bidirectional, non-owning side
     @ManyToMany(mappedBy = "authorities")
     private Set<Role> roles;
 }

@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/signinSignupLayout}">
+      layout:decorate="~{fragments/loginRegisterLayout}">
 <head>
-    <title>Sign In</title>
+    <title>Log In</title>
 </head>
 <body>
 
 <div layout:fragment="content"  class="card px-0 bg-light">
     <div class="card-body">
-        <h5 class="card-title fs-4 text-center mb-4">Sign In</h5>
+        <h5 class="card-title fs-4 text-center mb-4">Login Here !</h5>
 
-        <form class="needs-validation">
+        <form th:action="@{/login}" method="post">
+            <div th:if="${param.error}" class="alert alert-danger text-center">
+                <span>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]] !!!</span>
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-success text-center">
+                <span>Successfully logged out</span>
+            </div>
+
             <div class="mb-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" required>
+                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" required>
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                </div>
-
-                <div class="valid-feedback">
-                    Valid
-                </div>
-                <div class="invalid-feedback">
-                    Please enter a valid username.
                 </div>
             </div>
 
             <div class="mb-4">
                 <div class="input-group">
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" required>
+                    <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" required>
                     <span class="input-group-text"><i class="bi bi-key"></i></span>
                 </div>
                 <a href="#" class="fs-15px">Forgot Password?</a>
-
-                <div class="valid-feedback">
-                    Valid
-                </div>
-                <div class="invalid-feedback">
-                    Please enter a valid username.
-                </div>
             </div>
 
             <div class="mb-4">
@@ -51,11 +45,11 @@
             </div>
 
             <div class="mb-4">
-                <button class="btn btn-primary w-100" type="submit">Sign In</button>
+                <button class="btn btn-primary w-100" type="submit">Login</button>
             </div>
 
             <div class="mb-2 fs-15px">
-                Don't have an account? <a href="#">Sign Up Here</a>
+                Don't have an account? <a th:href="@{/register}">Register Here</a>
             </div>
         </form>
     </div>
