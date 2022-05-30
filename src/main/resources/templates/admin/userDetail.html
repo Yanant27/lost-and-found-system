@@ -68,9 +68,9 @@
                         Address
                     </div>
                     <div class="col-8" >
-                        <span th:text="*{street}=='' ? '' : *{street + ', '}">Street</span>
-                        <span th:text="*{city}=='' ? '' : *{city + ', '}">City</span>
-                        <span th:text="*{state}">State</span>
+                        <span th:text="*{address.street}=='' ? '' : *{address.street + ', '}">Street</span>
+                        <span th:text="*{address.city}=='' ? '' : *{address.city + ', '}">City</span>
+                        <span th:text="*{address.state}">State</span>
                     </div>
                 </div>
 

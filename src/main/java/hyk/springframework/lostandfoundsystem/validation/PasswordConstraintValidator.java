@@ -1,11 +1,10 @@
 package hyk.springframework.lostandfoundsystem.validation;
 
-import hyk.springframework.lostandfoundsystem.services.UserService;
-import hyk.springframework.lostandfoundsystem.web.dto.UserDto;
-import lombok.RequiredArgsConstructor;
+import hyk.springframework.lostandfoundsystem.domain.security.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.util.regex.Matcher;
@@ -14,22 +13,20 @@ import java.util.regex.Pattern;
 /**
  * @author Htoo Yanant Khin
  **/
-@RequiredArgsConstructor
 @Component
 @Slf4j
-public class PasswordValidator implements Validator {
-    private final UserService userService;
+public class PasswordConstraintValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return UserDto.class.equals(clazz);
+        return User.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        log.debug("Validate user input from view layer - Start");
-        UserDto userDto = (UserDto) target;
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty", "Password must be filled");
+        log.debug("Check password constraint");
+        User userDto = (User) target;
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty");
 
         /*
         Password validation
@@ -43,9 +40,7 @@ public class PasswordValidator implements Validator {
         Matcher matcher = pattern.matcher(userDto.getPassword());
         if (! matcher.matches()) {
             log.debug("Validate user input from view layer - Invalid password");
-            errors.rejectValue("password", "password.invalid", "Invalid password");
+            errors.rejectValue("password", "password.invalid");
         }
-
-        log.debug("Validate user input from view layer - End");
     }
 }

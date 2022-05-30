@@ -2,6 +2,8 @@ package hyk.springframework.lostandfoundsystem.domain.security;
 
 import hyk.springframework.lostandfoundsystem.domain.Address;
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
+import hyk.springframework.lostandfoundsystem.validation.ValidEmail;
+import hyk.springframework.lostandfoundsystem.validation.ValidPhoneNumber;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -29,27 +32,21 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-//    @NotEmpty
-//    @Size(min = 5, max = 30)
+    @Size(min = 5, max = 30)
     private String username;
 
-//    @NotEmpty
-//    @ValidPassword
     private String password;
 
-//    @NotEmpty
     @Transient
     private String confirmedPassword;
 
-//    @NotEmpty
-//    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 50)
     private String fullName;
 
-//    @ValidPhoneNumber
+    @ValidPhoneNumber
     private String phoneNumber;
 
-//    @ValidEmail
-//    @Email
+    @ValidEmail
     private String email;
 
     @Enumerated

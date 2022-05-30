@@ -29,32 +29,31 @@ public class LostFoundItem extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @NotEmpty(message = "Title must be filled")
-    @Size(max = 150)
+    @NotEmpty
+    @Size(min=5, max = 150)
     private String title;
 
-    @NotNull(message = "Lost/Found date must be filled")
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PastOrPresent(message = "Must be equal or less than today date")
+    @PastOrPresent
     private LocalDate lostFoundDate;
 
-    @NotEmpty(message = "Lost/Found location must be filled")
-    @Size(max = 150, message = "Must be less than 150 characters")
+    @NotEmpty
+    @Size(min=5, max = 150)
     private String lostFoundLocation;
 
-    @Size(max = 255, message = "Must be less than 255 characters")
+    @Size(max = 255)
     private String description;
 
-    @NotEmpty(message = "Reporter name must be filled")
-    @Size(min = 5, max = 50, message = "Must be between 5 and 50 characters")
+    @NotEmpty
+    @Size(min = 5, max = 50)
     private String reporterName;
 
+    @NotEmpty
     @ValidEmail
-    @NotEmpty(message = "Reporter e-mail must be filled")
-//    @Email
     private String reporterEmail;
 
-    @NotEmpty(message = "Reporter phone number must be filled")
+    @NotEmpty
     @ValidPhoneNumber
     private String reporterPhoneNo;
 

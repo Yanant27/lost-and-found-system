@@ -3,7 +3,6 @@ package hyk.springframework.lostandfoundsystem.web.controller;
 import hyk.springframework.lostandfoundsystem.domain.security.User;
 import hyk.springframework.lostandfoundsystem.services.UserService;
 import hyk.springframework.lostandfoundsystem.util.LoginUserUtil;
-import hyk.springframework.lostandfoundsystem.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
@@ -47,11 +46,11 @@ public class ProfileController {
 
     @PostMapping("/profile/edit")
     // @Valid parameter must be followed by BindingResult parameter
-    public String processUpdateProfileForm(@Valid @ModelAttribute("user") UserDto user, BindingResult result) {
+    public String processUpdateProfileForm(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()) {
             return PROFILE_UPDATE_FORM;
         } else {
-            User savedUser = userService.saveUser(user, false);
+            User savedUser = userService.saveUser(user);
             // If username is updated, set updated username to security context
             LoginUserUtil.getLoginUser().setUsername(savedUser.getUsername());
             log.debug("LostFoundItem Controller - Process profile update");

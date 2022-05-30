@@ -5,7 +5,7 @@
     --bg-focus: #FBE605;
     --bg-form: #F7F7F2;
     --bg-card: #F3EFE0;
-    --text-color: #655207;
+    /*--text-color: #655207;*/
 }
 
 .btn, .btn:hover, .btn:active, .btn:focus {
@@ -52,7 +52,7 @@ tbody {
 * {
     margin:0;
     padding:0;
-    color: var(--text-color);
+    /*color: var(--text-color);*/
     /*color: black;*/
     /*border: 2px solid red;*/
 }

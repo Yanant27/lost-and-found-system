@@ -3,8 +3,8 @@ package hyk.springframework.lostandfoundsystem.web.controller;
 import hyk.springframework.lostandfoundsystem.domain.security.User;
 import hyk.springframework.lostandfoundsystem.repositories.security.RoleRepository;
 import hyk.springframework.lostandfoundsystem.services.UserService;
-import hyk.springframework.lostandfoundsystem.validation.PasswordValidator;
-import hyk.springframework.lostandfoundsystem.web.dto.UserDto;
+import hyk.springframework.lostandfoundsystem.validation.PasswordConstraintValidator;
+import hyk.springframework.lostandfoundsystem.validation.PasswordMatchingValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,7 +29,8 @@ public class UserManageController {
 
     private final UserService userService;
     private final RoleRepository roleRepository;
-    private final PasswordValidator validator;
+    private final PasswordConstraintValidator passwordConstraintValidator;
+    private final PasswordMatchingValidator passwordMatchingValidator;
 
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/show")
@@ -51,7 +52,7 @@ public class UserManageController {
     @GetMapping("/new")
     public String initUserCreateForm(Model model) {
         log.debug("UserManageController Controller - Show user creation form");
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("user", new User());
         model.addAttribute("allRoles", roleRepository.findAll());
         return USER_CREATE_FORM;
     }
@@ -59,39 +60,32 @@ public class UserManageController {
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping("/new")
     // @Valid parameter must be followed by BindingResult parameter
-    public String processUserCreateForm(@Valid @ModelAttribute("user") UserDto user,
+    public String processUserCreateForm(@Valid @ModelAttribute("user") User user,
                                         BindingResult result, Model model) {
         log.debug("UserManageController Controller - Process user creation - Start");
         // Check password constraint
-        validator.validate(user, result);
+        passwordConstraintValidator.validate(user, result);
+
+        // Check password match
+        passwordMatchingValidator.validate(user, result);
 
         // Check duplicate username
         if (userService.isUsernameAlreadyExisted(user.getUsername(), -1)) {
-            result.rejectValue("username", "username.duplicate", "Username has already been taken");
+            result.rejectValue("username", "username.duplicate");
         }
 
         // Check duplicate email
         if (userService.isEmailAlreadyExisted(user.getEmail(), -1)) {
-            result.rejectValue("email", "email.duplicate", "E-mail has already been taken");
-        }
-
-        // Check confirmed password is empty or not
-        if (user.getConfirmedPassword().isEmpty()) {
-            result.rejectValue("confirmedPassword", "confirmedPassword.empty", "Confirmed password must be filled");
-        }
-
-        // Check password matching or not
-        if (! user.getPassword().equals(user.getConfirmedPassword())) {
-            result.rejectValue("confirmedPassword", "password.unmatched", "Passwords don't match");
+            result.rejectValue("email", "email.duplicate");
         }
 
         if (result.hasErrors()) {
             model.addAttribute("allRoles", roleRepository.findAll());
             return USER_CREATE_FORM;
         } else {
-            User savedUserDto = userService.saveUser(user, true);
+            User savedUser = userService.saveUser(user);
             log.debug("UserManageController Controller - Process user creation - End");
-            return USER_SHOW_REDIRECT_URI + savedUserDto.getId();
+            return USER_SHOW_REDIRECT_URI + savedUser.getId();
         }
     }
 
@@ -107,27 +101,27 @@ public class UserManageController {
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PostMapping("/edit")
     // @Valid parameter must be followed by BindingResult parameter
-    public String processUserUpdateForm(@Valid @ModelAttribute("user") UserDto user,
+    public String processUserUpdateForm(@Valid @ModelAttribute("user") User user,
                                         BindingResult result, Model model) {
         log.debug("UserManageController Controller - Process user update - Start");
         // Check password constraint
-        validator.validate(user, result);
+        passwordConstraintValidator.validate(user, result);
 
         // Check duplicate username
         if (userService.isUsernameAlreadyExisted(user.getUsername(), user.getId())) {
-            result.rejectValue("username", "username.duplicate", "Username has already been taken");
+            result.rejectValue("username", "username.duplicate");
         }
 
         // Check duplicate email
         if (userService.isEmailAlreadyExisted(user.getEmail(), user.getId())) {
-            result.rejectValue("email", "email.duplicate", "E-mail has already been taken");
+            result.rejectValue("email", "email.duplicate");
         }
 
         if (result.hasErrors()) {
             model.addAttribute("allRoles", roleRepository.findAll());
             return USER_UPDATE_FORM;
         } else {
-            User savedUser = userService.saveUser(user, false);
+            User savedUser = userService.saveUser(user);
             log.debug("UserManageController Controller - Process user update - End");
             return USER_SHOW_REDIRECT_URI + savedUser.getId();
         }

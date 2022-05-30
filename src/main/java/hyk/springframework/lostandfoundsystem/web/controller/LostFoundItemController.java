@@ -3,7 +3,6 @@ package hyk.springframework.lostandfoundsystem.web.controller;
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
 import hyk.springframework.lostandfoundsystem.domain.security.User;
 import hyk.springframework.lostandfoundsystem.services.LostFoundItemService;
-import hyk.springframework.lostandfoundsystem.services.UserService;
 import hyk.springframework.lostandfoundsystem.util.LoginUserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +30,6 @@ public class LostFoundItemController {
     private static final String ALL_LOST_FOUND_ITEMS = "lostfound/allLostFoundItems";
 
     private final LostFoundItemService lostFoundItemService;
-    private final UserService userService;
 
     @GetMapping("/show")
     public String showAllLostFoundItems(Model model) {

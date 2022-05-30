@@ -16,15 +16,13 @@
                 <form class="needs-validation p-2" th:object="${user}"
                       th:action="@{'/profile/edit'}" method="post">
                     <input type="hidden" th:field="*{id}" />
-<!--                    <input type="hidden" th:field="*{createdTimestamp}" />-->
-<!--                    <input type="hidden" th:field="*{lastModifiedTimestamp}" />-->
+                    <input type="hidden" th:field="*{createdTimestamp}" />
                     <input type="hidden" th:field="*{username}">
                     <input type="hidden" th:field="*{password}">
-<!--                    <input type="hidden" th:field="*{confirmedPassword}">-->
-<!--                    <input type="hidden" th:field="*{roles}">-->
-<!--                    <input type="hidden" th:field="*{accountNonExpired}">-->
+                    <input type="hidden" th:field="*{roles}">
+                    <input type="hidden" th:field="*{accountNonExpired}">
                     <input type="hidden" th:field="*{accountNonLocked}">
-<!--                    <input type="hidden" th:field="*{credentialsNonExpired}">-->
+                    <input type="hidden" th:field="*{credentialsNonExpired}">
                     <input type="hidden" th:field="*{enabled}">
                     <input type="hidden" th:field="*{lostFoundItems}">
 
@@ -75,21 +73,21 @@
                     <h6 class="py-2">Address</h6>
                     <div class="row mb-4">
                         <div class="col input-group input-group-sm">
-                            <input type="text" class="form-control" th:field="*{street}" placeholder="Street" aria-label="Street" required>
+                            <input type="text" class="form-control" th:field="*{address.street}" placeholder="Street" aria-label="Street" required>
                             <span class="input-group-text"><i class="bi bi-signpost-split" ></i></span>
                         </div>
                     </div>
 
                     <div class="row mb-4">
                         <div class="col input-group input-group-sm">
-                            <input type="text" class="form-control" th:field="*{city}" placeholder="City" aria-label="City" required>
+                            <input type="text" class="form-control" th:field="*{address.city}" placeholder="City" aria-label="City" required>
                             <span class="input-group-text"><i class="bi bi-flag"></i></span>
                         </div>
                     </div>
 
                     <div class="row mb-4">
                         <div class="col input-group input-group-sm">
-                            <select class="form-select" th:field="*{state}" aria-label="State" >
+                            <select class="form-select" th:field="*{address.state}" aria-label="State" >
                                 <option th:each="stateValue : ${T(hyk.springframework.lostandfoundsystem.enums.State).values()}"
                                         th:value="${stateValue.name()}"
                                         th:text="${stateValue.name()}">State
