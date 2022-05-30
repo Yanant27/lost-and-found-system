@@ -1,7 +1,7 @@
 package hyk.springframework.lostandfoundsystem.domain.security;
 
+import hyk.springframework.lostandfoundsystem.domain.Address;
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
-import hyk.springframework.lostandfoundsystem.domain.UserInfo;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,11 +29,31 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+//    @NotEmpty
+//    @Size(min = 5, max = 30)
     private String username;
+
+//    @NotEmpty
+//    @ValidPassword
     private String password;
 
+//    @NotEmpty
     @Transient
-    private String passwordConfirm;
+    private String confirmedPassword;
+
+//    @NotEmpty
+//    @Size(min = 5, max = 50)
+    private String fullName;
+
+//    @ValidPhoneNumber
+    private String phoneNumber;
+
+//    @ValidEmail
+//    @Email
+    private String email;
+
+    @Enumerated
+    private Address address;
 
     @Singular // use with singular form "authority"
     /*
@@ -60,18 +80,15 @@ public class User implements UserDetails {
     @Builder.Default
     private Boolean enabled = true;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserInfo userInfo;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<LostFoundItem> lostFoundItems;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createdDate;
+    private LocalDateTime createdTimestamp;
 
     @UpdateTimestamp
-    private Timestamp lastModifiedDate;
+    private LocalDateTime lastModifiedTimestamp;
 
     @Transient
     public Set<GrantedAuthority> getAuthorities() {
