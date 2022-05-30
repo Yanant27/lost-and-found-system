@@ -10,13 +10,13 @@
 <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
 <div layout:fragment="content" class="col"
      th:with="text=${lostFoundItem['new']} ? 'Create' : 'Update'">
-    <h3 class="text-center p-3 m-3"
-        th:text="${text + ' Report for Your Lost/Found Item'}">Report Form</h3>
-    <div class="d-flex flex-column align-items-center justify-content-center mb-5">
-        <div class="card p-4 bg-light w-50">
+    <h5 class="text-center p-2 m-3"
+        th:text="${text + ' Report for Your Lost/Found Item'}">Report Form</h5>
+    <div class="d-flex flex-column align-items-center justify-content-center mb-3">
+        <div class="card p-3" style="width: 30rem;">
             <div class="card-body">
                 <form th:object="${lostFoundItem}" class="needs-validation"
-                      th:with="createOrUpdate=${lostFoundItem['new']} ? 'new' : 'edit/' + ${lostFoundItem.id}"
+                      th:with="createOrUpdate=${lostFoundItem['new']} ? 'new' : 'edit'"
                       th:action="@{'/lostFound/' + ${createOrUpdate}}"
                       method="post">
                     <input type="hidden" th:field="*{id}" />
@@ -27,9 +27,10 @@
                     <input type="hidden" th:field="*{version}" />
                     <input type="hidden" th:field="*{user.id}" />
 
-                    <div class="row mb-4">
+                    <h6>Item Information</h6>
+                    <div class="row mb-3">
                         <div class="col">
-                            <select class="form-select" aria-label="Type" th:field="*{type}">
+                            <select class="form-select form-select-sm" aria-label="Type" th:field="*{type}">
                                 <option th:each="typeValue : ${T(hyk.springframework.lostandfoundsystem.enums.Type).values()}"
                                         th:value="${typeValue.name()}"
                                         th:text="${typeValue.name()}">Type
@@ -38,7 +39,7 @@
                         </div>
 
                         <div class="col">
-                            <select class="form-select" aria-label="Category" th:field="*{category}">
+                            <select class="form-select form-select-sm" aria-label="Category" th:field="*{category}">
                                 <option th:each="categoryValue : ${T(hyk.springframework.lostandfoundsystem.enums.Category).values()}"
                                         th:value="${categoryValue.name()}"
                                         th:text="${categoryValue.name()}">Category
@@ -47,58 +48,92 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{title}" placeholder="Title" aria-label="Title" required>
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{title}" placeholder="Title" aria-label="Title">
                             <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
                         </div>
+                        <span th:if="${#fields.hasErrors('title')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{lostFoundDate}" placeholder="Lost/Found Date (YYYY-MM-DD)" aria-label="Lost/Found Date" required
-                                   pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{lostFoundDate}" placeholder="Lost/Found Date (YYYY-MM-DD)" aria-label="Lost/Found Date">
                             <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
                         </div>
+                        <span th:if="${#fields.hasErrors('lostFoundDate')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('lostFoundDate')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{lostFoundLocation}" placeholder="Lost/Found Location" aria-label="Lost/Found Location" required>
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{lostFoundLocation}" placeholder="Lost/Found Location" aria-label="Lost/Found Location">
                             <span class="input-group-text"><i class="bi bi-pin-map"></i></span>
                         </div>
+                        <span th:if="${#fields.hasErrors('lostFoundLocation')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('lostFoundLocation')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
                             <textarea class="form-control" th:field="*{description}" placeholder="Detail Description (Write other necessary information for lost/found item)" aria-label="Description" rows="3"></textarea>
                         </div>
+                        <span th:if="${#fields.hasErrors('description')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
                     <h6>Contact Information</h6>
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{reporterName}" placeholder="Full Name" aria-label="Full Name" required>
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{reporterName}" placeholder="Full Name" aria-label="Full Name">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
                         </div>
+                        <span th:if="${#fields.hasErrors('reporterName')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('reporterName')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{reporterPhoneNo}" placeholder="Phone Number" aria-label="Phone Number" required>
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{reporterPhoneNo}" placeholder="Phone Number" aria-label="Phone Number">
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
                         </div>
+                        <span th:if="${#fields.hasErrors('reporterPhoneNo')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('reporterPhoneNo')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col input-group">
-                            <input type="text" class="form-control" th:field="*{reporterEmail}" placeholder="E-mail" aria-label="E-mail" required>
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{reporterEmail}" placeholder="E-mail" aria-label="E-mail">
                             <span class="input-group-text">@</span>
                         </div>
+                        <span th:if="${#fields.hasErrors('reporterEmail')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('reporterEmail')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
                     </div>
 
                     <div class="col">
-                        <button th:text="${text}" class="btn btn-success w-100" type="submit">Save</button>
+                        <button th:text="${text}" class="btn btn-success btn-sm w-100" type="submit">Save</button>
                     </div>
                 </form>
             </div>

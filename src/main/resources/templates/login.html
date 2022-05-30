@@ -7,51 +7,61 @@
 </head>
 <body>
 
-<div layout:fragment="content"  class="card px-0 bg-light">
-    <div class="card-body">
-        <h5 class="card-title fs-4 text-center mb-4">Login Here !</h5>
+<div layout:fragment="content"
+     class="d-flex flex-column align-items-center justify-content-center p-2 vh-100">
+    <div class="m-2 p-2">
+        <img class="img-fluid" th:src="@{/images/logo.png}" alt="Logo" width="45" height="25">
+        <span class="fs-5 fw-bold d-none d-sm-inline ms-2">Lost & Found System</span>
+    </div>
+    <div class="card px-0" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-3">Log In</h5>
 
-        <form th:action="@{/login}" method="post">
-            <div th:if="${param.error}" class="alert alert-danger text-center">
-                <span>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]] !!!</span>
-            </div>
-
-            <div th:if="${param.logout}" class="alert alert-success text-center">
-                <span>Successfully logged out</span>
-            </div>
-
-            <div class="mb-4">
-                <div class="input-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" required>
-                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}" class="alert alert-danger text-center">
+                    [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
                 </div>
-            </div>
+                <!--            <div th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']?.message} == 'Bad credentials'"-->
+                <!--                 class="alert alert-danger">Invalid Username or Password !-->
+                <!--            </div>-->
 
-            <div class="mb-4">
-                <div class="input-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" required>
-                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                <div th:if="${param.logout}" class="alert alert-success text-center">
+                    Successfully logged out
                 </div>
-                <a href="#" class="fs-15px">Forgot Password?</a>
-            </div>
 
-            <div class="mb-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="rememberme">
-                    <label class="form-check-label" for="rememberme">
-                        Remember Me
-                    </label>
+                <div class="mb-3">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" required>
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <button class="btn btn-primary w-100" type="submit">Login</button>
-            </div>
+                <div class="mb-3">
+                    <div class="input-group input-group-sm">
+                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" required>
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    </div>
+<!--                    <a href="#" class="fs-15px">Forgot Password?</a>-->
+                </div>
 
-            <div class="mb-2 fs-15px">
-                Don't have an account? <a th:href="@{/register}">Register Here</a>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <!-- name of the checkbox must be "remember-me" which is required by Spring Security -->
+                        <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me">
+                        <label class="form-check-label" for="remember-me">Remember Me</label>
+
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-sm w-100" type="submit">Login</button>
+                </div>
+
+                <div class="fs-15px">
+                    Don't have an account? <a th:href="@{/register}">Register Here</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

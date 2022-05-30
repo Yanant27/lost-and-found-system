@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/loginRegisterLayout}">
+<head>
+    <title>Registration</title>
+</head>
+<body>
+
+<div layout:fragment="content"
+     class="d-flex flex-column align-items-center justify-content-center p-2">
+    <div class="m-2 p-2">
+        <img class="img-fluid" th:src="@{/images/logo.png}" alt="Logo" width="45" height="25">
+        <span class="fs-5 fw-bold d-none d-sm-inline ms-2">Lost & Found System</span>
+    </div>
+    <div class="card px-0" style="width: 24rem;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-3">Registration Form</h5>
+
+            <form class="needs-validation px-3" th:action="@{/register}" th:object="${user}" method="post">
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{username}" placeholder="Username" aria-label="Username">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('username')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('username')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="password" class="form-control" th:field="*{password}" placeholder="Password" aria-label="Password">
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('password')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('password')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="password" class="form-control" th:field="*{confirmedPassword}" placeholder="Confirm Password" aria-label="Confirm Password">
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('confirmedPassword')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('confirmedPassword')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{fullName}"  placeholder="Full Name" aria-label="Full Name">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('fullName')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('fullName')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Phone Number" aria-label="Phone Number">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('phoneNumber')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('phoneNumber')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{email}" placeholder="E-mail" aria-label="E-mail">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <span th:if="${#fields.hasErrors('email')}">
+                        <ul class="m-0">
+                            <li class="text-danger" th:each="err : ${#fields.errors('email')}" th:text="${err}"></li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{street}" placeholder="Street" aria-label="Street">
+                        <span class="input-group-text"><i class="bi bi-signpost-split" ></i></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <input type="text" class="form-control" th:field="*{city}" placeholder="City" aria-label="City">
+                        <span class="input-group-text"><i class="bi bi-flag"></i></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col input-group input-group-sm">
+                        <select class="form-select form-select-sm" th:field="*{state}" aria-label="State">
+                            <option th:each="stateValue : ${T(hyk.springframework.lostandfoundsystem.enums.State).values()}"
+                                    th:value="${stateValue.name()}"
+                                    th:text="${stateValue.name()}">State
+                            </option>
+                        </select>
+                        <span class="input-group-text"><i class="bi bi-geo-alt" ></i></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <button class="btn btn-success btn-sm w-100">Create Account</button>
+                    </div>
+                </div>
+
+                <div class="fs-15px">
+                    Already have an Account? <a th:href="@{/login}">Login Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

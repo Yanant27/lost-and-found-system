@@ -4,13 +4,13 @@
 <body>
 
 <!-- Start of Side Bar Navigation -->
-<div th:fragment="sidebar" sec:authorize="isAuthenticated()"  class="col-auto col-md-3 col-xl-2 px-sm-2 bg-light">
+<div th:fragment="sidebar" sec:authorize="isAuthenticated()"  class="col-auto col-md-3 col-xl-2 px-sm-2" style="background-color: #A38B70;">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-3 min-vh-100 sticky-top">
-        <div class="d-flex align-items-center pb-3 me-md-auto">
-            <img class="ms-2" th:src="@{/images/logo.png}" alt="Logo" width="40" height="40">
+        <div class="d-flex align-items-center pb-3 me-md-auto border-bottom" style="width: 100%">
+            <img class="img-fluid ms-2" th:src="@{/images/logo.png}" alt="Logo" width="40" height="40">
             <span class="fs-5 d-none d-sm-inline ms-3">Lost & Found</span>
         </div>
-        <a th:href="@{/user/profile}" class="nav-link px-0 align-middle w-100 border-top border-bottom py-2">
+        <a th:href="@{'/profile/' + ${#authentication?.principal?.id}}" class="nav-link px-0 align-middle w-100 border-bottom py-2">
             <i class="fs-4 bi bi-person-circle"></i> <span th:text="${#authentication?.principal?.username}" class="ms-1 d-none d-sm-inline">Yanant</span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto align-items-center align-items-sm-start" id="menu">
@@ -29,10 +29,6 @@
             </li>
 <!--            <li>-->
 <!--                <a href="#" class="nav-link px-0 align-middle">-->
-<!--                    <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">Report</span></a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="#" class="nav-link px-0 align-middle">-->
 <!--                    <i class="fs-4 bi-grid-3x3-gap"></i> <span class="ms-1 d-none d-sm-inline">Category</span> </a>-->
 <!--            </li>-->
 <!--            <li>-->
@@ -40,9 +36,13 @@
 <!--                    <i class="fs-4 bi-check2-circle"></i> <span class="ms-1 d-none d-sm-inline">Approval</span> </a>-->
 <!--            </li>-->
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
+                <a th:href="@{/admin/usermanagement/show}" class="nav-link px-0 align-middle" sec:authorize="hasAuthority('CREATE_ADMIN')">
                     <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">User Management</span> </a>
             </li>
+<!--            <li>-->
+<!--                <a th:href="@{'/accountSetting/' + ${#authentication?.principal?.id}}" class="nav-link px-0 align-middle">-->
+<!--                    <i class="fs-4 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Account Setting</span></a>-->
+<!--            </li>-->
             <li>
                 <a th:href="@{/logout}" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Log Out</span> </a>

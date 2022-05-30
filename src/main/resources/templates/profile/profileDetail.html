@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Profile - User Access</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h4 class="text-center p-2 m-3">Profile Information</h4>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="card p-3" style="width: 30rem;">
+            <div class="card-body" th:object="${user}">
+<!--                <input type="hidden" th:field="*{id}" />-->
+<!--                <input type="hidden" th:field="*{createdTimestamp}" />-->
+<!--                <input type="hidden" th:field="*{lastModifiedTimestamp}" />-->
+<!--                <input type="hidden" th:field="*{version}" />-->
+<!--                <input type="hidden" th:field="*{id}" />-->
+
+                <div class="row p-2">
+                    <div class="col-4">
+                        Full Name
+                    </div>
+                    <div class="col-8" >
+                        <span th:text="*{fullName}">War War Aung</span>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-4">
+                        Phone Number
+                    </div>
+                    <div class="col-8" >
+                        <span th:text="*{phoneNumber}">09-987654321</span>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-4">
+                        E-mail
+                    </div>
+                    <div class="col-8" >
+                        <span th:text="*{email}">warwaraung@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-4">
+                        Address
+                    </div>
+                    <div class="col-8" >
+                        <span th:text="*{street + ', '}">Street</span>
+                        <span th:text="*{city + ', '}">City</span>
+                        <span th:text="*{state}">State</span>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-4">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <span th:text="*{enabled}?'Enabled, ' : 'Disable'">Enabled/Disable</span>
+                        <span th:text="*{accountNonLocked}?'Unlocked' : 'Locked'">Unlock/Lock</span>
+                    </div>
+                </div>
+
+                <div class="row p-2 text-center">
+                    <div class="col">
+                        <a class="btn btn-success w-100"
+                                th:href="@{'/profile/' + *{id} + '/edit'}">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

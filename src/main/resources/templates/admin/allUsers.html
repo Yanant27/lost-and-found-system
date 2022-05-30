@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>User Management</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h4 class="text-center p-2 m-3 h-color">User Management</h4>
+    <div class="container">
+        <div class="pb-4">
+            <a th:href="@{/admin/usermanagement/new}" class="btn btn-primary btn-sm">
+                <i class="bi-plus-circle pe-2"></i>New User</a>
+        </div>
+        <div class="d-flex justify-content-center" >
+            <table class="table table-hover table-responsive text-wrap">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Enable/Disable</th>
+                    <th scope="col">Lock/Unlock</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody th:if="${not #lists.isEmpty(users)}">
+                <tr th:each="user : ${users}">
+<!--                    <td th:text="*{user.roles[0].name}"></td>-->
+                    <td th:text="*{user.username}">warwar</td>
+                    <td th:text="*{user.fullName}">War War Aung</td>
+                    <td th:text="*{user.email}">warwar@gmail.com</td>
+                    <td th:text="*{user.enabled} ? 'Enabled' : 'Disable'">Enabled</td>
+                    <td th:text="*{user.accountNonLocked} ? 'Unlock' : 'Lock'">Unlock</td>
+                    <td>
+                        <a th:href="@{'/admin/usermanagement/show/' + *{user.id}}"><i class="bi bi-eye text-primary"></i></a>
+                        <a th:href="@{'/admin/usermanagement/edit/' + *{user.id}}"><i class="bi bi-pencil-square text-success m-2"></i></a>
+                        <a th:href="@{'/admin/usermanagement/delete/' + *{user.id}}"
+                           data-bs-toggle="modal"
+                           th:attr="data-bs-target='#deleteConfirmationModal' + ${user.id}"><i class="bi bi-trash3 text-danger"></i></a>
+                        <div  class="modal fade" th:attr="id='deleteConfirmationModal' + ${user.id}"
+                              tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">
+                                            <i class="bi bi-exclamation-triangle text-danger fs-4 me-3"></i>Are you sure ?
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        Do you really want to delete this user? This operation cannot be undone.
+                                        <div class="d-flex justify-content-center gap-3 mt-4">
+                                            <input type="hidden" /> <!-- for ID -->
+                                            <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                                            <!--                                                    <a th:href="@{'/lostFound/delete/' + ${lostFoundItem.id}}" class="btn btn-danger">Delete</a>-->
+                                            <a th:href="@{'/admin/usermanagement/delete/' + ${user.id}}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div><!-- End of modal body> -->
+                                </div>
+                            </div>
+                        </div> <!-- End of modal -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

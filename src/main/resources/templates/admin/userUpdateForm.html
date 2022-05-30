@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Update User</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h5 class="text-center p-2 m-3">Update User Form</h5>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="card p-3" style="width: 25rem;">
+            <div class="card-body">
+                <form th:object="${user}" class="needs-validation"
+                      th:action="@{/admin/usermanagement/edit}"
+                      method="post">
+                    <input type="hidden" th:field="*{id}" />
+<!--                    <input type="hidden" th:field="*{createdTimestamp}" />-->
+<!--                    <input type="hidden" th:field="*{lastModifiedTimestamp}" />-->
+<!--                    <input type="hidden" th:field="*{id}" />-->
+<!--                    <input type="hidden" th:field="*{username}">-->
+<!--                    <input type="hidden" th:field="*{password}">-->
+<!--                    <input type="hidden" th:field="*{confirmedPassword}">-->
+<!--                    <input type="hidden" th:field="*{roles}">-->
+<!--                    <input type="hidden" th:field="*{accountNonExpired}">-->
+                    <input type="hidden" th:field="*{accountNonLocked}">
+<!--                    <input type="hidden" th:field="*{credentialsNonExpired}">-->
+                    <input type="hidden" th:field="*{enabled}">
+<!--                    <input type="hidden" th:field="*{lostFoundItems}">-->
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Username" aria-label="Username">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        </div>
+                        <span th:if="${#fields.hasErrors('username')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('username')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password" aria-label="Password">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        </div>
+                        <span th:if="${#fields.hasErrors('password')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('password')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{fullName}" id="fullName" placeholder="Full Name" aria-label="Full Name">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        </div>
+                        <span th:if="${#fields.hasErrors('fullName')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('fullName')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone Number" aria-label="Phone Number">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        </div>
+                        <span th:if="${#fields.hasErrors('phoneNumber')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('phoneNumber')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="E-mail" aria-label="E-mail">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <span th:if="${#fields.hasErrors('email')}">
+                            <ul class="m-0">
+                                <li class="text-danger" th:each="err : ${#fields.errors('email')}" th:text="${err}"></li>
+                            </ul>
+                        </span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{street}" id="street" placeholder="Street" aria-label="Street">
+                            <span class="input-group-text"><i class="bi bi-signpost-split" ></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <input type="text" class="form-control" th:field="*{city}" id="city" placeholder="City" aria-label="City">
+                            <span class="input-group-text"><i class="bi bi-flag"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <select class="form-select" th:field="*{state}" aria-label="State">
+                                <option th:each="stateValue : ${T(hyk.springframework.lostandfoundsystem.enums.State).values()}"
+                                        th:value="${stateValue.name()}"
+                                        th:text="${stateValue.name()}">State
+                                </option>
+                            </select>
+                            <span class="input-group-text"><i class="bi bi-geo-alt" ></i></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col input-group input-group-sm">
+                            <select class="form-select" th:field="*{enabled}" aria-label="Status">
+                                <option th:value="TRUE">Enabled</option>
+                                <option th:value="FALSE">Disable</option>
+                            </select>
+                        </div>
+                        <div class="col input-group input-group-sm">
+                            <select class="form-select" th:field="*{accountNonLocked}" aria-label="Status">
+                                <option th:value="TRUE">Unlock</option>
+                                <option th:value="FALSE">Lock</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>
+                            <input type="checkbox" name="roles"
+                                   class="form-check-input"
+                                   th:each="role : ${allRoles}"
+                                   th:field="*{roles}"
+                                   th:text="${role.name} + '&nbsp;&nbsp;&nbsp;&nbsp;'"
+                                   th:value="${role.id}"/>
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-success btn-sm w-100">Save User</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

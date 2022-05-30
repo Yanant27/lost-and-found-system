@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/errorPagelayout}">
+
+<head>
+    <title>403 Forbidden Access</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div>
+        <img class="image-fluid" th:src="@{/images/access-denied.png}" width="100">
+    </div>
+    <h1>Access Denied !!!</h1>
+    <span class="fs-4">
+            You do not have permission to view this page.<br>
+    </span>
+    <a th:href="@{/index}">Back to Home</a>
+</div>
+
+<!--
+  // Hidden Exception Details
+  -->
+<p th:utext="'&lt;!--'" th:remove="tag"></p>
+<p th:utext="'Failed URL: ' +  ${url}" th:remove="tag">${url}</p>
+<p th:utext="'Occurred Timestame: ' +  ${timestamp}" th:remove="tag">${timestamp}</p>
+<p th:utext="'Response Status: ' +  ${status}" th:remove="tag">${status}</p>
+
+<div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
+<ul th:remove="tag">
+    <li th:each="ste : ${exception.stackTrace}" th:remove="tag"><span
+            th:utext="${ste}" th:remove="tag">${ste}</span></li>
+</ul>
+<div th:utext="'--&gt;'" th:remove="tag"></div>
+
+</body>
+</html>

@@ -9,17 +9,18 @@
 
 <!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
 <div layout:fragment="content" class="col">
-    <h3 class="text-center p-3 m-3" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Item Detail' : 'Lost Item Detail'">Item Detail</h3>
+    <h5 class="text-center p-2 m-3" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Item Detail' : 'Lost Item Detail'">Item Detail</h5>
 <!--    <h3 class="text-center p-3 m-3" th:if="${lostFoundItem.type.name()} == 'LOST'">LOST Item Detail</h3>-->
-    <div class="d-flex flex-column align-items-center justify-content-center mb-5">
-        <div class="card px-4 bg-light w-50">
+    <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+        <div class="card px-4 w-50">
             <div class="card-body">
 
+                <h6 class="mt-2">Item Information</h6>
                 <div class="row py-2">
                     <div class="col-4">
                         Title
                     </div>
-                    <div class="col-auto" >
+                    <div class="col-8">
                         <span th:text="${lostFoundItem.title}">Dell Laptop</span>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                     <div class="col-4">
                         Category
                     </div>
-                    <div class="col-auto">
+                    <div class="col-8">
                         <span th:text="${lostFoundItem.category}">Electronics</span>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                     <div class="col-4" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Date' : 'Lost Date'">
                         Date
                     </div>
-                    <div class="col-auto">
+                    <div class="col-8">
                         <span th:text="${lostFoundItem.lostFoundDate}">2022/01/21</span>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                     <div class="col-4" th:text="${lostFoundItem.type.name()} == 'FOUND' ? 'Found Location' : 'Lost Location'">
                         Location
                     </div>
-                    <div class="col-auto">
+                    <div class="col-8">
                         <span th:text="${lostFoundItem.lostFoundLocation}">Hlaing Township</span>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
                     </div>
                 </div>
 
-                <h6 class="mt-3">Contact Information</h6>
+                <h6>Contact Information</h6>
                 <div class="row py-2">
                     <div class="col-4">
                         Name
@@ -107,11 +108,16 @@
                     </div>
                 </div>
 
-<!--                <div class="row py-3 text-center">-->
-<!--                    <a th:href="@{/lostFound/show}">Back</a>-->
-<!--                </div>-->
+                <div class="row py-2 text-center">
+                    <div class="col">
+                        <a class="btn btn-success btn-sm w-100"
+                           th:href="@{'/lostFound/edit/' + ${lostFoundItem.id}}"
+                           th:if="${#authorization.expression('hasAuthority(''UPDATE_ADMIN'')')} or
+                                  ${#authentication?.principal?.id} == ${lostFoundItem.user.id}">Edit Report</a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div> <!-- End of card -->
     </div>
 </div>
 

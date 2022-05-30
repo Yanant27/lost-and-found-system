@@ -15,9 +15,9 @@
 <!--            <div th:each="lostFoundItem : ${lostFoundItems}">-->
 <!--                <div th:text="${#authorization.expression('hasAuthority(''lostFoundItem.update'')')} or-->
 <!--                              (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.update'')')} and-->
-<!--                               ${#authentication?.principal?.userInfo.id} == ${lostFoundItem.userInfo.id})"></div>-->
+<!--                               ${#authentication?.principal?.id} == ${lostFoundItem.user.id})"></div>-->
 <!--            </div>-->
-            <h3 class="text-center p-3 m-3">All Lost/Found Reported Items</h3>
+            <h5 class="text-center p-2 m-3">All Lost/Found Reported Items</h5>
             <div class="container">
                 <div class="row pb-3">
 <!--                    <div class="col">-->
@@ -25,22 +25,22 @@
 <!--                    </div>-->
                     <div class="col text-end">
                         <a th:href="@{'/lostFound/show/current/' + ${#authentication?.principal?.id}}"
-                           class="btn btn-primary fw-semibold me-3"><i class="bi-check2 text-white pe-2"></i>Show My Items Only</a>
-                        <a th:href="@{/lostFound/show}" class="btn btn-primary fw-semibold"><i class="bi-check2-all text-white pe-2"></i>Show All Items</a>
+                           class="btn btn-primary btn-sm fw-semibold me-3"><i class="bi-check2 pe-2"></i>Show My Items Only</a>
+                        <a th:href="@{/lostFound/show}" class="btn btn-primary btn-sm fw-semibold"><i class="bi-check2-all pe-2"></i>Show All Items</a>
                     </div>
                 </div>
 
                 <table class="table table-hover table-responsive text-wrap">
-                    <thead class="table-light">
+                    <thead>
                     <tr>
-                        <th scope="col" class="w-10">Type</th>
-                        <th scope="col" class="w-15">Category</th>
-                        <th scope="col" class="w-35">Title</th>
-                        <th scope="col" class="w-15">Lost Date</th>
-                        <th scope="col" class="w-20">Lost Location</th>
+                        <th scope="col" class="col-1">Type</th>
+                        <th scope="col" class="col-2">Category</th>
+                        <th scope="col" class="col-4">Title</th>
+                        <th scope="col" class="col-2">Lost Date</th>
+                        <th scope="col" class="col-2">Lost Location</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
-                    </thead> <!-- lostFoundItemsByReporterId -->
+                    </thead>
                     <tbody th:if="${not #lists.isEmpty(lostFoundItems)}">
                     <tr th:each="lostFoundItem : ${lostFoundItems}">
                         <td th:text="${lostFoundItem.id}" hidden></td>
@@ -54,39 +54,49 @@
                             <div class="d-flex justify-content-center">
                                 <a th:href="@{'/lostFound/show/' + ${lostFoundItem.id}}"><i class="bi bi-eye text-primary"></i></a>
                                 <a th:href="@{'/lostFound/edit/' + ${lostFoundItem.id}}"
-                                   th:if="${#authorization.expression('hasAuthority(''lostFoundItem.update'')')} or
-                                            (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.update'')')} and
-                                             ${#authentication?.principal?.id} == ${lostFoundItem.user.id})"
+                                   th:if="${#authorization.expression('hasAuthority(''UPDATE_ADMIN'')')} or
+                                          ${#authentication?.principal?.id} == ${lostFoundItem.user.id}"
                                    class="mx-3"><i class="bi bi-pencil-square text-success"></i></a>
-                                <a href="" th:if="${#authorization.expression('hasAuthority(''lostFoundItem.delete'')')} or
-                                            (${#authorization.expression('hasAuthority(''lostFoundItem.loginUser.delete'')')} and
-                                             ${#authentication?.principal?.id} == ${lostFoundItem.user.id})"
-                                   data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>
-                            </div>
-                            <div th:fragment="deleteConfirmationModal"  class="modal fade" id="deleteConfirmationModal"
-                                 tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
+<!--                                <a href="" th:if="${#authorization.expression('hasAuthority(''DELETE_ADMIN'')')} or-->
+<!--                                                  ${#authentication?.principal?.id} == ${lostFoundItem.user.id}"-->
+<!--                                   data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"><i class="bi bi-trash3 text-danger"></i></a>-->
 
-                                    <div class="modal-content">
+                                <!--                                <button th:if="${#authorization.expression('hasAuthority(''DELETE_ADMIN'')')} or-->
+<!--                                               ${#authentication?.principal?.id} == ${lostFoundItem.user.id}"-->
+<!--                                   data-bs-toggle="modal" th:attr="data-bs-target='#deleteConfirmationModal' + ${lostFoundItem.id}">-->
+<!--                                    <i class="bi bi-trash3 text-danger"></i></button>-->
+                                <a href="" th:if="${#authorization.expression('hasAuthority(''DELETE_ADMIN'')')} or
+                                                  ${#authentication?.principal?.id} == ${lostFoundItem.user.id}"
+                                           data-bs-toggle="modal"
+                                           th:attr="data-bs-target='#deleteConfirmationModal' + ${lostFoundItem.id}">
+                                           <i class="bi bi-trash3 text-danger"></i></a>
 
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteConfirmationModalLabel">
-                                                <i class="bi bi-exclamation-triangle text-danger fs-4 me-3"></i>Are you sure ?
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
+                                <div  class="modal fade" th:attr="id='deleteConfirmationModal' + ${lostFoundItem.id}"
+                                      tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
 
-                                        <div class="modal-body">
-                                            Do you really want to delete this record? This operation cannot be undone.
-                                            <div class="d-flex justify-content-center gap-3 mt-4">
-                                                <input type="hidden" /> <!-- for ID -->
-                                                <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
-                                                <a th:href="@{'/lostFound/delete/' + ${lostFoundItem.id}}" class="btn btn-danger">Delete</a>
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteConfirmationModalLabel">
+                                                    <i class="bi bi-exclamation-triangle text-danger fs-4 me-3"></i>Are you sure ?
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                        </div><!-- End of modal body> -->
+
+                                            <div class="modal-body">
+                                                Do you really want to delete this record? This operation cannot be undone.
+                                                <div class="d-flex justify-content-center gap-3 mt-4">
+                                                    <input type="hidden" /> <!-- for ID -->
+                                                    <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+<!--                                                    <a th:href="@{'/lostFound/delete/' + ${lostFoundItem.id}}" class="btn btn-danger">Delete</a>-->
+                                                    <a th:href="@{'/lostFound/delete/' + ${lostFoundItem.id}}" class="btn btn-danger">Delete</a>
+                                                </div>
+                                            </div><!-- End of modal body> -->
+                                        </div>
                                     </div>
-                                </div>
-                            </div> <!-- End of modal -->
+                                </div> <!-- End of modal -->
+                            </div>
                         </td>
                     </tr>
                     </tbody>
