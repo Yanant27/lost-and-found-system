@@ -1,0 +1,104 @@
+<!-- Postpone this feature -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Account Setting</title>
+</head>
+<body>
+
+<!-- /* Content of this page will be decorated by the elements of layout.html (fragments/layout) */ -->
+<div layout:fragment="content" class="col">
+    <h3 class="text-center p-3 m-2">Account Setting</h3>
+    <div class="d-flex flex-column align-items-center justify-content-center grid gap-4">
+        <div class="card px-0 bg-light w-50">
+            <div class="card-body">
+                <form class="needs-validation p-3" th:object="${user}"
+                      th:action="@{'/accountSetting/' + ${#authentication?.principal?.id} + '/username'}" method="post">
+
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                        <p>Please Correct Errors Below</p>
+                    </div>
+
+                    <h6 class="py-2">Change Username</h6>
+                    <div class="row mb-2">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{password}">
+                        <input type="hidden" th:field="*{newPassword}">
+                        <input type="hidden" th:field="*{confirmedPassword}">
+                        <input type="hidden" th:field="*{accountNonExpired}">
+                        <input type="hidden" th:field="*{accountNonLocked}">
+                        <input type="hidden" th:field="*{credentialsNonExpired}">
+                        <input type="hidden" th:field="*{createdDate}">
+                        <div class="col">
+                            <input type="text" th:name="username" class="form-control" id="username" placeholder="Enter a new username" required>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success px-2">Change</button>
+                        </div>
+                    </div>
+                    <span class="text-warning"><i class="bi-exclamation-triangle text-warning me-1"></i>
+                        After successfully changing username, it will be automatically logged out.
+                        Please log in again with new username.</span>
+                </form>
+            </div>
+        </div>
+
+        <div class="card px-0 bg-light w-50 mb-5">
+            <div class="card-body">
+                <form class="needs-validation p-3" th:object="${user}"
+                      th:action="@{'/accountSetting/' + ${#authentication?.principal?.id} + '/password'}" method="post">
+                    <h6 class="py-2">Password Setting</h6>
+
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{username}">
+<!--                    <input type="text" th:field="*{password}">-->
+                    <input type="hidden" th:field="*{accountNonExpired}">
+                    <input type="hidden" th:field="*{accountNonLocked}">
+                    <input type="hidden" th:field="*{credentialsNonExpired}">
+                    <input type="hidden" th:field="*{createdDate}">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <label for="password" class="form-label">Current Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password" th:name="password" class="form-control" id="password" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <label for="newPassword" class="form-label">New Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password" th:name="newPassword" class="form-control" id="newPassword" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        </div>
+                        <div class="col">
+                            <input type="password" th:name="confirmedPassword" class="form-control" id="confirmPassword" required>
+                        </div>
+                    </div>
+
+                    <span class="text-warning"><i class="bi-exclamation-triangle text-warning me-1"></i>
+                        After successfully changing password, it will be automatically logged out.
+                        Please log in again with new password.</span>
+
+                    <div class="row text-center">
+                        <div class="col">
+                            <button class="btn btn-success mt-3">Change Password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
