@@ -8,15 +8,15 @@ import java.util.UUID;
 
 public interface LostFoundItemService {
 
-    List<LostFoundItem> findAllLostFoundItems();
+    List<LostFoundItem> findAllItems();
 
-    List<LostFoundItem> findAllLostFoundItemByUserId(Integer userId);
+    List<LostFoundItem> findAllItemsByUserId(Integer userId);
 
-    LostFoundItem findLostFoundItemById(UUID itemId);
+    LostFoundItem findItemById(UUID itemId);
 
-    LostFoundItem saveLostFoundItem(LostFoundItem lostFoundItem);
+    LostFoundItem saveItem(LostFoundItem lostFoundItem);
 
-    void deleteLostFoundItemById(UUID itemId);
+    void deleteItemById(UUID itemId);
 
-    Long countLostFoundItemByType(Type type);
+    Long countItemByType(Type type);
 }
