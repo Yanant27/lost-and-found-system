@@ -2,7 +2,6 @@ package hyk.springframework.lostandfoundsystem.bootstrap;
 
 import hyk.springframework.lostandfoundsystem.domain.Address;
 import hyk.springframework.lostandfoundsystem.domain.LostFoundItem;
-import hyk.springframework.lostandfoundsystem.domain.UserInfo;
 import hyk.springframework.lostandfoundsystem.domain.security.Authority;
 import hyk.springframework.lostandfoundsystem.domain.security.Role;
 import hyk.springframework.lostandfoundsystem.domain.security.User;
@@ -10,7 +9,6 @@ import hyk.springframework.lostandfoundsystem.enums.Category;
 import hyk.springframework.lostandfoundsystem.enums.State;
 import hyk.springframework.lostandfoundsystem.enums.Type;
 import hyk.springframework.lostandfoundsystem.repositories.LostFoundItemRepository;
-import hyk.springframework.lostandfoundsystem.repositories.UserInfoRepository;
 import hyk.springframework.lostandfoundsystem.repositories.security.AuthorityRepository;
 import hyk.springframework.lostandfoundsystem.repositories.security.RoleRepository;
 import hyk.springframework.lostandfoundsystem.repositories.security.UserRepository;
@@ -35,7 +33,6 @@ import java.util.Set;
 public class DataLoader implements CommandLineRunner {
 
     private final LostFoundItemRepository lostFoundItemRepository;
-    private final UserInfoRepository userInfoRepository;
     private final AuthorityRepository authorityRepository;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
@@ -47,77 +44,27 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        // Create authority for admin
-        Authority createItemAdmin = authorityRepository.save(Authority.builder().permission("lostFoundItem.create").build());
-        Authority readItemAdmin = authorityRepository.save(Authority.builder().permission("lostFoundItem.read").build());
-        Authority updateItemAdmin = authorityRepository.save(Authority.builder().permission("lostFoundItem.update").build());
-        Authority deleteItemAdmin = authorityRepository.save(Authority.builder().permission("lostFoundItem.delete").build());
+        // Create lost/found item authority for admin
+        Authority createAdmin = authorityRepository.save(Authority.builder().permission("CREATE_ADMIN").build());
+        Authority readAdmin = authorityRepository.save(Authority.builder().permission("READ_ADMIN").build());
+        Authority updateAdmin = authorityRepository.save(Authority.builder().permission("UPDATE_ADMIN").build());
+        Authority deleteAdmin = authorityRepository.save(Authority.builder().permission("DELETE_ADMIN").build());
 
-        // Create authority for user
-        Authority createItemUser = authorityRepository.save(Authority.builder().permission("lostFoundItem.loginUser.create").build());
-        Authority readItemUser = authorityRepository.save(Authority.builder().permission("lostFoundItem.loginUser.read").build());
-        Authority updateItemUser = authorityRepository.save(Authority.builder().permission("lostFoundItem.loginUser.update").build());
-        Authority deleteItemUser = authorityRepository.save(Authority.builder().permission("lostFoundItem.loginUser.delete").build());
+        Authority createUser = authorityRepository.save(Authority.builder().permission("CREATE_USER").build());
+        Authority readUser = authorityRepository.save(Authority.builder().permission("READ_USER").build());
+        Authority updateuser = authorityRepository.save(Authority.builder().permission("UPDATE_USER").build());
+        Authority deleteUser = authorityRepository.save(Authority.builder().permission("DELETE_USER").build());
 
         // Create admin and user role
         Role adminRole = roleRepository.save(Role.builder().name("ADMIN").build());
         Role userRole = roleRepository.save(Role.builder().name("USER").build());
 
-        adminRole.setAuthorities(new HashSet<>(Set.of(createItemAdmin, readItemAdmin, updateItemAdmin, deleteItemAdmin)));
-        userRole.setAuthorities(new HashSet<>(Set.of(createItemUser, readItemUser, updateItemUser, deleteItemUser)));
+        adminRole.setAuthorities(new HashSet<>(Set.of(createAdmin, readAdmin, updateAdmin, deleteAdmin)));
+        userRole.setAuthorities(new HashSet<>(Set.of(createUser, readUser, updateuser, deleteUser)));
 
         roleRepository.saveAll(Arrays.asList(adminRole, userRole));
         log.debug("Role Data loaded. Total Count: " + roleRepository.count());
         log.debug("Authority Data loaded. Total Count: " + authorityRepository.count());
-
-        UserInfo adminInfo = UserInfo.builder()
-                .fullName("Admin")
-                .phoneNumber("09-123456789")
-                .email("hykadmin@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo1 = UserInfo.builder()
-                .fullName("War War")
-                .phoneNumber("09-111222333")
-                .email("warwar@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo2 = UserInfo.builder()
-                .fullName("Lin Htet")
-                .phoneNumber("09-111222444")
-                .email("linhtet@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo3 = UserInfo.builder()
-                .fullName("Shine")
-                .phoneNumber("09-111222555")
-                .email("shine@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo4 = UserInfo.builder()
-                .fullName("EaintChit")
-                .phoneNumber("09-111222666")
-                .email("eaintchit@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo5 = UserInfo.builder()
-                .fullName("Khin Pyone")
-                .phoneNumber("09-111222777")
-                .email("khinpyone@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
-
-        UserInfo userInfo6 = UserInfo.builder()
-                .fullName("Ye Aung")
-                .phoneNumber("09-111222888")
-                .email("yeaung@gmail.com")
-                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
-                .build();
 
         LostFoundItem item1 = LostFoundItem.builder()
                 .type(Type.LOST)
@@ -126,7 +73,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Room 21, Building 12")
                 .reporterName("War War")
                 .reporterEmail("warwar@gmail.com")
-                .reporterPhoneNo("09-111222333")
+                .reporterPhoneNo("09111222333")
                 .createdBy("warwar")
                 .modifiedBy("warwar")
                 .category(Category.ACCESSORIES)
@@ -141,7 +88,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Library")
                 .reporterName("Lin Htet")
                 .reporterEmail("linhtet@gmail.com")
-                .reporterPhoneNo("09-111222444")
+                .reporterPhoneNo("09111222444")
                 .createdBy("linhtet")
                 .modifiedBy("linhtet")
                 .category(Category.ELECTRONIC)
@@ -156,7 +103,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Room 10, building 10")
                 .reporterName("Shine")
                 .reporterEmail("shine@gmail.com")
-                .reporterPhoneNo("09-111222555")
+                .reporterPhoneNo("09111222555")
                 .createdBy("shine")
                 .modifiedBy("shine")
                 .category(Category.OTHERS)
@@ -171,7 +118,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Room 9, building 21")
                 .reporterName("Eaint Chit")
                 .reporterEmail("eaintchit@gmail.com")
-                .reporterPhoneNo("09-111222666")
+                .reporterPhoneNo("09111222666")
                 .createdBy("eaintchit")
                 .modifiedBy("eaintchit")
                 .category(Category.CLOTHING)
@@ -186,7 +133,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Near building 12")
                 .reporterName("Khin Pyone")
                 .reporterEmail("khinpyone@gmail.com")
-                .reporterPhoneNo("09-111222777")
+                .reporterPhoneNo("09111222777")
                 .createdBy("khinpyone")
                 .modifiedBy("khinpyone")
                 .category(Category.FOOTWEAR)
@@ -201,7 +148,7 @@ public class DataLoader implements CommandLineRunner {
                 .lostFoundLocation("Room 2, building 12")
                 .reporterName("Ye Aung")
                 .reporterEmail("yeaung@gmail.com")
-                .reporterPhoneNo("09-111222888")
+                .reporterPhoneNo("09111222888")
                 .createdBy("yeaung")
                 .modifiedBy("yeaung")
                 .category(Category.FOOTWEAR)
@@ -211,58 +158,86 @@ public class DataLoader implements CommandLineRunner {
 
         User admin = userRepository.save(
                 User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("admin"))
-                .role(adminRole)
-                .userInfo(adminInfo)
-                .build());
+                        .username("admin")
+                        .password(passwordEncoder.encode("Admin11@"))
+                        .confirmedPassword("Admin11@")
+                        .role(adminRole)
+                        .fullName("Admin")
+                        .phoneNumber("09123456789")
+                        .email("hykadmin@gmail.com")
+                        .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
+                        .build());
 
 
         User user1 = User.builder()
                 .username("warwar")
-                .password(passwordEncoder.encode("war"))
+                .password(passwordEncoder.encode("Warwar11@"))
+                .confirmedPassword("Warwar11@")
                 .role(userRole)
-                .userInfo(userInfo1)
+                .fullName("War War")
+                .phoneNumber("09111222333")
+                .email("warwar@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item1))
                 .build();
 
         User user2 = User.builder()
                 .username("linhtet")
-                .password(passwordEncoder.encode("lin"))
+                .password(passwordEncoder.encode("Linhtet11@"))
+                .confirmedPassword("Linhtet11@")
                 .role(userRole)
-                .userInfo(userInfo2)
+                .fullName("Lin Htet")
+                .phoneNumber("09111222444")
+                .email("linhtet@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item2))
                 .build();
 
         User user3 = User.builder()
                 .username("shine")
-                .password(passwordEncoder.encode("shine"))
+                .password(passwordEncoder.encode("Shine11@"))
+                .confirmedPassword("Shine11@")
                 .role(userRole)
-                .userInfo(userInfo3)
+                .fullName("Shine")
+                .phoneNumber("09111222555")
+                .email("shine@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item3))
                 .build();
 
         User user4 = User.builder()
                 .username("eaintchit")
-                .password(passwordEncoder.encode("eaint"))
+                .password(passwordEncoder.encode("Eaint11@"))
+                .confirmedPassword("Shine11@")
                 .role(userRole)
-                .userInfo(userInfo4)
+                .fullName("EaintChit")
+                .phoneNumber("09111222666")
+                .email("eaintchit@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item4))
                 .build();
 
         User user5 = User.builder()
                 .username("khinpyone")
-                .password(passwordEncoder.encode("khin"))
+                .password(passwordEncoder.encode("Khinpyone11@"))
+                .confirmedPassword("Khinpyone11@")
                 .role(userRole)
-                .userInfo(userInfo5)
+                .fullName("Khin Pyone")
+                .phoneNumber("09111222777")
+                .email("khinpyone@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item5))
                 .build();
 
         User user6 = User.builder()
                 .username("yeaung")
-                .password(passwordEncoder.encode("ye"))
+                .password(passwordEncoder.encode("Yeaung11@"))
+                .confirmedPassword("Yeaung11@")
                 .role(userRole)
-                .userInfo(userInfo6)
+                .fullName("Ye Aung")
+                .phoneNumber("09111222888")
+                .email("yeaung@gmail.com")
+                .address(Address.builder().city("Mudon").state(State.MON).street("Aung Thiri Street").build())
                 .lostFoundItems(List.of(item6))
                 .build();
 
@@ -273,19 +248,10 @@ public class DataLoader implements CommandLineRunner {
         item5.setUser(user5);
         item6.setUser(user6);
 
-        adminInfo.setUser(admin);
-        userInfo1.setUser(user1);
-        userInfo2.setUser(user2);
-        userInfo3.setUser(user3);
-        userInfo4.setUser(user4);
-        userInfo5.setUser(user5);
-        userInfo6.setUser(user6);
-
         userRepository.saveAll(Arrays.asList(admin, user1, user2, user3, user4, user5, user6));
 
         log.debug("Lost/Found Data Loaded. Total: " + lostFoundItemRepository.count());
         log.debug("User Data Loaded: " + userRepository.count());
-        log.debug("User Info Data Loaded: " + userInfoRepository.count());
 
 //        lostFoundItemRepository.save(item1);
 //        lostFoundItemRepository.save(item2);
