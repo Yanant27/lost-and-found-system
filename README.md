@@ -1,6 +1,13 @@
 # Lost & Found System
 The main purpose is to gain practice in developing Spring Boot application and how to secure web application using Spring Security. It provides CRUD operations (create, read, update and delete data from database), role-based access control (RBAC) and login, logout functionality.
 
+## Table of Contents
+- [Technologies](#technologies)  
+- [Setup](#setup)  
+- [System Overview](#system-overview)  
+- [System Captures](#system-captures)  
+- [Ideas for Enhancement](#ideas-for-enhancement)  
+
 ## Technologies
 - Spring Boot
 - Spring MVC
@@ -35,6 +42,7 @@ User can
 
 _System contains validation for all user inputs and all validations are performed in server side._
 
+<a name="system-captures"></a>
 ## System Captures
 #### Login
 ![This is an image](/capture/login.PNG)
