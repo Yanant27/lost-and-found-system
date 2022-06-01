@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -82,10 +82,10 @@ public class User implements UserDetails {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdTimestamp;
+    private Timestamp createdTimestamp;
 
     @UpdateTimestamp
-    private LocalDateTime lastModifiedTimestamp;
+    private Timestamp lastModifiedTimestamp;
 
     @Transient
     public Set<GrantedAuthority> getAuthorities() {

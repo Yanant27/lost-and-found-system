@@ -1,4 +1,4 @@
-package hyk.springframework.lostandfoundsystem.security;
+package hyk.springframework.lostandfoundsystem.security.service;
 
 import hyk.springframework.lostandfoundsystem.repositories.security.UserRepository;
 import lombok.RequiredArgsConstructor;

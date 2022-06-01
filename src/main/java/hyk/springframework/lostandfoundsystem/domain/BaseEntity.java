@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -39,10 +39,10 @@ public class BaseEntity {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdTimestamp;
+    private Timestamp createdTimestamp;
 
     @UpdateTimestamp
-    private LocalDateTime lastModifiedTimestamp;
+    private Timestamp lastModifiedTimestamp;
 
     public boolean isNew() {
         return this.id == null;
