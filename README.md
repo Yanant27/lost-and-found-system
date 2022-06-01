@@ -103,6 +103,18 @@ Update Operation
 Delete Operation
 ![This is an image](/capture/admin-user-delete.PNG)
 
+#### Access Denied
+Although UI components are restricted using Thymeleaf spring security dialect, user might enter URL and try to access unauthorized page. For example, user don't have the right to modify or delete other user's reported items but try to perform that operation from URL.
+![This is an image](/capture/user-access-denied.PNG)
+
+#### Bad Request
+For malformed request syntax, customized bad request page will be displayed.
+![This is an image](/capture/bad-request.PNG)
+
+#### Resource Not Found
+For not existed resource, customized resource not found page will be displayed. For example, user searched all items and look details of one item without refreshing the page and that item was accidently deleted from database.
+![This is an image](/capture/resource-not-found.PNG)
+
 ## Ideas for Enhancement
 1. Integrate with Google Maps to show the lost/found location.
 2. Add images of lost/found items.
