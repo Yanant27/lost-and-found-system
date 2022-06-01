@@ -1,5 +1,5 @@
 # Lost & Found System
-The main purpose is to gain practice in developing Spring Boot application and how to secure web application using Spring Security. It provides CRUD operations (create, read, update and delete data from database), role-based access control (RBAC) and login, logout functionality.
+The system provides CRUD operations (create, read, update and delete data from database), role-based access control (RBAC) and login, logout functionality. To protect from too many login attempt with incorrect password, account will be locked for more than 3 failed log in. It will be automatically unlocked after one hour.
 
 ## Table of Contents
 - [Technologies](#technologies)  
@@ -114,6 +114,10 @@ For malformed request syntax, customized bad request page will be displayed.
 #### Resource Not Found
 For not existed resource, customized resource not found page will be displayed. For example, user searched all items and look details of one item without refreshing the page and that item was accidently deleted from database.
 ![This is an image](/capture/resource-not-found.PNG)
+
+#### Account Lock
+If user attempts to log in with incorrect password more than 3 times, account will be locked for 1 hour.
+![This is an image](/capture/account-lock.PNG)
 
 ## Ideas for Enhancement
 1. Integrate with Google Maps to show the lost/found location.
