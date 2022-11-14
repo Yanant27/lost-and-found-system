@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>hyk.springframework</groupId>
-    <artifactId>lost-and-found-manager</artifactId>
+    <artifactId>lost-and-found-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lost-and-found-manager</name>
+    <name>lost-and-found-system</name>
     <description>Managing Lost And Found Items</description>
     <properties>
         <java.version>8</java.version>
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+<!--                <version>3.7.0</version>-->
                 <configuration>
                     <source>9</source>
                     <target>9</target>

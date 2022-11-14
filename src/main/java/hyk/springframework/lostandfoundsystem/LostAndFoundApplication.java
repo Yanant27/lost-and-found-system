@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LostAndFoundSystemApplication {
+public class LostAndFoundApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LostAndFoundSystemApplication.class, args);
+        SpringApplication.run(LostAndFoundApplication.class, args);
     }
 
 }
