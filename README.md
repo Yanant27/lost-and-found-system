@@ -1,5 +1,9 @@
 # Lost & Found System
-The system provides CRUD operations (create, read, update and delete data from database), role-based access control (RBAC) and login, logout functionality. To protect from too many login attempt with incorrect password, account will be locked for more than 3 failed log in. It will be automatically unlocked after one hour.
+The system provides CRUD operations (create, read, update and delete data from database), role-based access control (RBAC) and login, logout functionality. 
+
+To protect from too many login attempt with incorrect password, account will be locked for more than 3 failed log in. 
+
+It will be automatically unlocked after one hour.
 
 ## Table of Contents
 - [Technologies](#technologies)  
@@ -9,22 +13,39 @@ The system provides CRUD operations (create, read, update and delete data from d
 - [Ideas for Enhancement](#ideas-for-enhancement)  
 
 ## Technologies
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Spring Security
-- Project Lombok
-- H2 Database
-- Thymeleaf
-- HTML 5
-- CSS 3
-- Bootstrap 5
-- Maven
+  - Front-end
+      - Thymeleaf
+      - HTML 5
+      - CSS 3
+      - Bootstrap 5
+  - Backend
+      - Java 8
+      - Spring Web
+      - Spring Boot DevTools
+      - Spring Data JPA
+      - Spring Security
+      - Lombok
+      - MapStruct
+      - H2 Database
+      - Validation
+      - Maven
+      
+**Browse the Maven pom.xml file for details of libraries and versions used.**
 
 ## Setup
-1. Clone github repository
-2. Import project into IDE.
-3. Hit run button
+This application use embedded Tomcat 8. Therefore, no Tomcat or JBoss installation is necessary.
+1. Run in IDE
+    - Clone github repository with command `git clone https://github.com/Yanant27/lost-and-found-system.git` and import project into IDE.
+    - Or download `.zip` file, unzip and import project into IDE.
+    - Execute the `main` method in the `e hyk.springframework.lostandfoundsystem.LostAndFoundApplication` class from your IDE.
+2. Run with maven
+    - You can build the project and run the tests by running `mvn clean package`.
+    - Once successfully built, you can run by one of these two methods.
+    ```    
+        java -jar target/lost-and-found-system-0.0.1-SNAPSHOT.jar
+        or
+        mvn spring-boot:run
+    ```
 
 ## System Overview
 This system is aimed to help people finding their lost properties. If they lost or found something, they can report by using this system. It provides two roles (admin, user) to access the system. 
